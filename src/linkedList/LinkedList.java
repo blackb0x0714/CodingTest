@@ -22,4 +22,17 @@ public class LinkedList {
 			return String.valueOf(this.data);
 		}
 	}
+	
+	public void addFirst(Object input) {
+		// 노드를 생성합니다.
+		Node newNode = new Node(input);
+		// 새로운 노드의 다음 노드로 헤드를 지정합니다.
+		newNode.next = head;
+		// 헤드로 새로운 노드를 지정합니다.
+		head = newNode;
+		size++;
+		if(head.next == null) {
+			tail = head;
+		}
+	}
 }
