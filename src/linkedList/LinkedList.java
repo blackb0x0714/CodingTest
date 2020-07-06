@@ -82,4 +82,23 @@ public class LinkedList {
 			}
 		}
 	}
+	
+	public String toString() {
+		// 노드가 없다면 []를 리턴합니다.
+		if(head == null) {
+			return "[]";
+		}
+		// 탐색을 시작합니다.
+		Node temp = head;
+		String str = "[";
+		// 다음 노드가 없을 때까지 반복문을 실행합니다.
+		// 마지막 노드는 다음 노드가 없기 때문에 아래의 구문은 마지막 노드는 제외됩니다.
+		while(temp.next != null) {
+			str += temp.data + ",";
+			temp = temp.next;
+		}
+		// 마지막 노드를 출력결과에 포함시킵니다.
+		str += temp.data;
+		return str + "]";
+	}
 }
