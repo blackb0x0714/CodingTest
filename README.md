@@ -10,7 +10,11 @@
 
 ---
 
-## 자료구조의 종류
+## 알고리즘 종류
+
+- [Sort](https://github.com/blackb0x0714/CodingTest/blob/master/Sort/README.md)
+
+## 자료구조 종류
 
 - [Array](https://github.com/blackb0x0714/CodingTest/tree/master/Array)
 - [Queue](https://github.com/blackb0x0714/CodingTest/tree/master/Queue)
