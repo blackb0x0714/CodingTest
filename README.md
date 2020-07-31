@@ -1,6 +1,8 @@
+# Table of Content
+
 # 알고리즘
 
-- [알고리즘이란?](#알고리즘이란?)
+- [알고리즘](#알고리즘)
 - [시간복잡도](#시간복잡도)
 - [삽입 정렬(Insertion Sort)](#삽입-정렬)
 - [합병(머지,병합) 정렬(Merge Sort)](#합병-정렬)
@@ -23,15 +25,17 @@
 
 ---
 
-## 알고리즘이란?
+## 알고리즘
 
 - 출처 : [Zero Cho님 사이트](https://www.zerocho.com/category/Algorithm/post/57e22a778d6bcf0015231c8b)
+  [Top](#Table-of-Content)
 
 ---
 
 ## 시간복잡도
 
 - 출처 : [Zero Cho님 사이트](https://www.zerocho.com/category/Algorithm/post/57ea2987fdea850015313534)
+  [Top](#Table-of-Content)
 
 ---
 
@@ -62,7 +66,7 @@ var insertionSort = function (array) {
 insertionSort([5, 6, 1, 2, 4, 3]); // [1, 2, 3, 4, 5, 6]
 ```
 
----
+## [Top](#Table-of-Content)
 
 ## 합병 정렬
 
@@ -97,7 +101,7 @@ function merge(left, right) {
 mergeSort([5, 2, 4, 7, 6, 1, 3, 8]); // [1, 2, 3, 4, 5, 6, 7, 8]
 ```
 
----
+## [Top](#Table-of-Content)
 
 ## 버블 정렬
 
@@ -126,7 +130,7 @@ var bubbleSort = function (array) {
 bubbleSort([5, 1, 7, 4, 6, 3, 2, 8]);
 ```
 
----
+## [Top](#Table-of-Content)
 
 ## 선택 정렬
 
@@ -156,7 +160,7 @@ var selectionSort = function (array) {
 selectionSort([5, 1, 4, 7, 2, 6, 8, 3]); // [1,2,3,4,5,6,7,8]
 ```
 
----
+## [Top](#Table-of-Content)
 
 ## 퀵 정렬
 
@@ -203,7 +207,7 @@ var quickSort = function (array, left, right) {
 quickSort([4, 1, 7, 6, 3, 8, 2, 5]); // [1,2,3,4,5,6,7,8]
 ```
 
----
+## [Top](#Table-of-Content)
 
 ## 계수 정렬
 
@@ -246,7 +250,7 @@ var countingSort = function (array, k) {
 countingSort([3, 4, 0, 1, 2, 4, 2, 4], 4); // [0,1,2,2,3,4,4,4]
 ```
 
----
+## [Top](#Table-of-Content)
 
 ## 기수 정렬
 
@@ -285,7 +289,7 @@ var radixLSD = function (array, d) {
 radixLSD([125, 383, 274, 96, 0, 9, 81, 72], 3); // [0,9,72,81,96,125,274,383]
 ```
 
----
+## [Top](#Table-of-Content)
 
 ## 연결리스트
 
@@ -372,7 +376,7 @@ list.remove(1);
 list.length; // 2
 ```
 
----
+## [Top](#Table-of-Content)
 
 ## 스택
 
@@ -422,7 +426,7 @@ stack.pop(); // 5
 stack.stackTop(); // 3
 ```
 
----
+## [Top](#Table-of-Content)
 
 ## 큐
 
@@ -477,7 +481,7 @@ queue.dequeue(); // 1
 queue.front(); // 3
 ```
 
----
+## [Top](#Table-of-Content)
 
 ## 트리
 
@@ -591,7 +595,7 @@ tree.remove(3);
 tree.root.left.data;
 ```
 
----
+## [Top](#Table-of-Content)
 
 ## 힙
 
@@ -600,7 +604,7 @@ tree.root.left.data;
 ```javascript
 ```
 
----
+## [Top](#Table-of-Content)
 
 ## AVL 트리
 
@@ -609,7 +613,7 @@ tree.root.left.data;
 ```javascript
 ```
 
----
+## [Top](#Table-of-Content)
 
 ## 그래프
 
@@ -618,4 +622,4 @@ tree.root.left.data;
 ```javascript
 ```
 
----
+## [Top](#Table-of-Content)
