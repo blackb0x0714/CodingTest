@@ -28,14 +28,14 @@
 ## 알고리즘
 
 - 출처 : [Zero Cho님 사이트](https://www.zerocho.com/category/Algorithm/post/57e22a778d6bcf0015231c8b)
-  [Top](#📝-Table-of-Contents)
+  [Top](#알고리즘)
 
 ---
 
 ## 시간복잡도
 
 - 출처 : [Zero Cho님 사이트](https://www.zerocho.com/category/Algorithm/post/57ea2987fdea850015313534)<br>
-  [Top](#Table-of-Contents)
+  [Top](#알고리즘)
 
 ---
 
@@ -66,7 +66,7 @@ var insertionSort = function (array) {
 insertionSort([5, 6, 1, 2, 4, 3]); // [1, 2, 3, 4, 5, 6]
 ```
 
-[Top](#Table-of-Contents)
+[Top](#알고리즘)
 
 ---
 
@@ -103,7 +103,7 @@ function merge(left, right) {
 mergeSort([5, 2, 4, 7, 6, 1, 3, 8]); // [1, 2, 3, 4, 5, 6, 7, 8]
 ```
 
-[Top](#Table-of-Contents)
+[Top](#알고리즘)
 
 ---
 
@@ -134,7 +134,7 @@ var bubbleSort = function (array) {
 bubbleSort([5, 1, 7, 4, 6, 3, 2, 8]);
 ```
 
-[Top](#Table-of-Contents)
+[Top](#알고리즘)
 
 ---
 
@@ -166,7 +166,7 @@ var selectionSort = function (array) {
 selectionSort([5, 1, 4, 7, 2, 6, 8, 3]); // [1,2,3,4,5,6,7,8]
 ```
 
-[Top](#Table-of-Contents)
+[Top](#알고리즘)
 
 ---
 
@@ -215,7 +215,7 @@ var quickSort = function (array, left, right) {
 quickSort([4, 1, 7, 6, 3, 8, 2, 5]); // [1,2,3,4,5,6,7,8]
 ```
 
-[Top](#Table-of-Contents)
+[Top](#알고리즘)
 
 ---
 
@@ -260,7 +260,7 @@ var countingSort = function (array, k) {
 countingSort([3, 4, 0, 1, 2, 4, 2, 4], 4); // [0,1,2,2,3,4,4,4]
 ```
 
-[Top](#Table-of-Contents)
+[Top](#알고리즘)
 
 ---
 
@@ -301,7 +301,7 @@ var radixLSD = function (array, d) {
 radixLSD([125, 383, 274, 96, 0, 9, 81, 72], 3); // [0,9,72,81,96,125,274,383]
 ```
 
-[Top](#Table-of-Contents)
+[Top](#알고리즘)
 
 ---
 
@@ -390,7 +390,7 @@ list.remove(1);
 list.length; // 2
 ```
 
-[Top](#Table-of-Contents)
+[Top](#알고리즘)
 
 ---
 
@@ -442,7 +442,7 @@ stack.pop(); // 5
 stack.stackTop(); // 3
 ```
 
-[Top](#Table-of-Contents)
+[Top](#알고리즘)
 
 ---
 
@@ -499,7 +499,7 @@ queue.dequeue(); // 1
 queue.front(); // 3
 ```
 
-[Top](#Table-of-Contents)
+[Top](#알고리즘)
 
 ---
 
@@ -615,7 +615,7 @@ tree.remove(3);
 tree.root.left.data;
 ```
 
-[Top](#Table-of-Contents)
+[Top](#알고리즘)
 
 ---
 
@@ -626,7 +626,7 @@ tree.root.left.data;
 ```javascript
 ```
 
-[Top](#Table-of-Contents)
+[Top](#알고리즘)
 
 ---
 
@@ -637,7 +637,7 @@ tree.root.left.data;
 ```javascript
 ```
 
-[Top](#Table-of-Contents)
+[Top](#알고리즘)
 
 ---
 
@@ -648,6 +648,6 @@ tree.root.left.data;
 ```javascript
 ```
 
-[Top](#Table-of-Contents)
+[Top](#알고리즘)
 
 ---
