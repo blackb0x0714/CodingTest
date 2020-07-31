@@ -1,31 +1,43 @@
 # 알고리즘
 
-- [Insertion Sort](#삽입-정렬)
-- [Merge Sort](#합병-정렬)
-- [Bubble Sort](#버블-정렬)
-- [Selection Sort](#선택-정렬)
-- [Quick Sort](#퀵-정렬)
-- [Counting Sort](#계수-정렬)
-- [Radix Sort](#기수-정렬)
+- [알고리즘이란?](#알고리즘이란?)
+- [시간복잡도](#시간복잡도)
+- [삽입 정렬(Insertion Sort)](#삽입-정렬)
+- [합병(머지,병합) 정렬(Merge Sort)](#합병-정렬)
+- [버블(거품) 정렬(Bubble Sort)](#버블-정렬)
+- [선택 정렬(Selection Sort)](#선택-정렬)
+- [퀵 정렬(Quick Sort)](#퀵-정렬)
+- [계수 정렬(Counting Sort)](#계수-정렬)
+- [기수 정렬(Radix Sort)](#기수-정렬)
 
 # 자료구조
 
-- [Linked List](#)
-- [Stack](#)
-- [Queue](#)
-- [Tree](#)
-- [Heap](#)
-- [Tree](#)
-- [Graph](#)
-
-- 출처 : [Zero Cho님 사이트](https://www.zerocho.com/category/Algorithm?page=3)
+- [연결리스트(LinkedList)](#연결리스트)
+- [스택(Stack)](#스택)
+- [큐(Queue)](#큐)
+- [트리(Tree)](#트리)
+- [힙(Heap)](#힙)
+- [트리(Tree)](#트리)
+- [AVL 트리(Tree)](#AVL-트리)
+- [그래프(Graph)](#그래프)
 
 ---
 
-## Best - O(1),O(logN), O(N), O(NlogN), O(N^2), O(N^3), ..., O(2^N), O(N!) - Worst
+## 알고리즘이란?
+
+- 출처 : [Zero Cho님 사이트](https://www.zerocho.com/category/Algorithm/post/57e22a778d6bcf0015231c8b)
+
+---
+
+## 시간복잡도
+
+- 출처 : [Zero Cho님 사이트](https://www.zerocho.com/category/Algorithm/post/57ea2987fdea850015313534)
+
+---
 
 ## 삽입 정렬
 
+- 출처 : [Zero Cho님 사이트](https://www.zerocho.com/category/Algorithm/post/57e39fca76a7850015e6944a)
 - 성능 : O(n^2)
 - i : 뽑을 숫자의 위치를 선택할 변수
 - temp : 뽑은 숫자 값을 저장할 변수
@@ -54,6 +66,7 @@ insertionSort([5, 6, 1, 2, 4, 3]); // [1, 2, 3, 4, 5, 6]
 
 ## 합병 정렬
 
+- 출처 : [Zero Cho님 사이트](https://www.zerocho.com/category/Algorithm/post/57ee1fc107c0b40015045cb4)
 - 성능 : O(NlogN)
 - mergeSort : 재귀를 하는 부분
 - merge : 두 수끼리 비교하는 부분
@@ -88,6 +101,7 @@ mergeSort([5, 2, 4, 7, 6, 1, 3, 8]); // [1, 2, 3, 4, 5, 6, 7, 8]
 
 ## 버블 정렬
 
+- 출처 : [Zero Cho님 사이트](https://www.zerocho.com/category/Algorithm/post/57f67519799d150015511c38)
 - 성능 : O(n^2)
 
 ```javascript
@@ -116,6 +130,7 @@ bubbleSort([5, 1, 7, 4, 6, 3, 2, 8]);
 
 ## 선택 정렬
 
+- 출처 : [Zero Cho님 사이트](https://www.zerocho.com/category/Algorithm/post/57f728c85141fc5fe4f4ca89)
 - 성능 : O(n^2)
 
 ```javascript
@@ -145,6 +160,7 @@ selectionSort([5, 1, 4, 7, 2, 6, 8, 3]); // [1,2,3,4,5,6,7,8]
 
 ## 퀵 정렬
 
+- 출처 : [Zero Cho님 사이트](https://www.zerocho.com/category/Algorithm/post/57f72d415141fc5fe4f4ca8b)
 - 성능 : O(NlogN)
 - 정렬하는 부분
 - 재귀하는 부분
@@ -191,6 +207,7 @@ quickSort([4, 1, 7, 6, 3, 8, 2, 5]); // [1,2,3,4,5,6,7,8]
 
 ## 계수 정렬
 
+- 출처 : [Zero Cho님 사이트](https://www.zerocho.com/category/Algorithm/post/58006da88475ed00152d6c4b)
 - 성능 : O(n + k)
 - array
 - [개수를 저장할 공간]
@@ -233,6 +250,7 @@ countingSort([3, 4, 0, 1, 2, 4, 2, 4], 4); // [0,1,2,2,3,4,4,4]
 
 ## 기수 정렬
 
+- 출처 : [Zero Cho님 사이트](https://www.zerocho.com/category/Algorithm/post/58007c338475ed00152d6c4c)
 - O(dn)
 
 ```javascript
@@ -265,6 +283,339 @@ var radixLSD = function (array, d) {
   return array;
 };
 radixLSD([125, 383, 274, 96, 0, 9, 81, 72], 3); // [0,9,72,81,96,125,274,383]
+```
+
+---
+
+## 연결리스트
+
+- 출처 : [Zero Cho님 사이트](https://www.zerocho.com/category/Algorithm/post/58008a628475ed00152d6c4d)
+- length : 노드의 개수를 표현하는 부분, head : 첫 노드의 주소를 가리키는 부분
+- data, next
+- add, search, remove
+
+```javascript
+var LinkedList = (function () {
+  function LinkedList() {
+    this.length = 0;
+    this.head = null;
+  }
+  function Node(data) {
+    this.data = data;
+    this.next = null;
+  }
+  LinkedList.prototype.add = function (value) {
+    var node = new Node(value);
+    var current = this.head;
+    if (!current) {
+      // 현재 아무도 없으면
+      this.head = node; // head에 새 노드를 추가합니다.
+      this.length++;
+      return node;
+    } else {
+      // 이미 노드가 있다면
+      while (current.next) {
+        // 마지막 노드를 찾고
+        current = current.next;
+      }
+      current.next = node; // 마지막 위치에 노드를 추가합니다.
+      this.length++;
+      return node;
+    }
+  };
+  LinkedList.prototype.search = function (position) {
+    var current = this.head;
+    var count = 0;
+    while (count < position) {
+      // position 위치만큼 이동합니다.
+      current = current.next;
+      count++;
+    }
+    return current.data;
+  };
+  LinkedList.prototype.remove = function (position) {
+    var current = this.head;
+    var before;
+    var remove;
+    var count = 0;
+    if (position == 0) {
+      // 맨 처음 노드를 삭제하면
+      remove = this.head;
+      this.head = this.head.next; // head를 두 번째 노드로 교체
+      this.length--;
+      return remove;
+    } else {
+      // 그 외의 다른 노드를 삭제하면
+      while (count < position) {
+        before = current;
+        count++;
+        current = current.next;
+      }
+      remove = current;
+      before.next = remove.next;
+      // remove 메모리 정리
+      this.length--;
+      return remove;
+    }
+  };
+  return LinkedList;
+})();
+
+var list = new LinkedList();
+list.add(1);
+list.add(2);
+list.add(3);
+list.length; // 3
+list.search(0); // 1
+list.search(2); // 3
+list.remove(1);
+list.length; // 2
+```
+
+---
+
+## 스택
+
+- 출처 : [Zero Cho님 사이트](https://www.zerocho.com/category/Algorithm/post/5800b79e1dfb250015c38db6)
+- top, count
+- data, next
+- push, pop, stackTop
+
+```javascript
+var Stack = (function () {
+  function Stack() {
+    this.top = null;
+    this.count = 0;
+  }
+  function Node(data) {
+    this.data = data;
+    this.next = null;
+  }
+  Stack.prototype.push = function (data) {
+    var node = new Node(data);
+    node.next = this.top;
+    this.top = node;
+    return ++this.count;
+  };
+  Stack.prototype.pop = function () {
+    if (!this.top) {
+      // stack underflow 방지
+      return false;
+    }
+    var data = this.top.data;
+    this.top = this.top.next;
+    // 예전 this.top의 메모리 정리
+    this.count--;
+    return data;
+  };
+  Stack.prototype.stackTop = function () {
+    return this.top.data;
+  };
+  return Stack;
+})();
+
+var stack = new Stack();
+stack.push(1); // 1
+stack.push(3); // 2
+stack.push(5); // 3
+stack.pop(); // 5
+stack.stackTop(); // 3
+```
+
+---
+
+## 큐
+
+- 출처 : [Zero Cho님 사이트](https://www.zerocho.com/category/Algorithm/post/580b9b94108f510015524097)
+- count, head, rear
+- data, next
+- enqueue, dequeue, front
+
+```javascript
+var Queue = (function () {
+  function Queue() {
+    this.count = 0;
+    this.head = null;
+    this.rear = null;
+  }
+  function Node(data) {
+    this.data = data;
+    this.next = null;
+  }
+  Queue.prototype.enqueue = function (data) {
+    var node = new Node(data);
+    if (!this.head) {
+      this.head = node;
+    } else {
+      this.rear.next = node;
+    }
+    this.rear = node;
+    return ++this.count;
+  };
+  Queue.prototype.dequeue = function () {
+    if (!this.head) {
+      // stack underflow 방지
+      return false;
+    }
+    var data = this.head.data;
+    this.head = this.head.next;
+    // this.head 메모리 클린
+    --this.count;
+    return data;
+  };
+  Queue.prototype.front = function () {
+    return this.head && this.head.data;
+  };
+  return Queue;
+})();
+
+var queue = new Queue();
+queue.enqueue(1); // 1
+queue.enqueue(3); // 2
+queue.enqueue(5); // 3
+queue.dequeue(); // 1
+queue.front(); // 3
+```
+
+---
+
+## 트리
+
+- 출처 : [Zero Cho님 사이트](https://www.zerocho.com/category/Algorithm/post/580ed6eb77023c0015ee9686)
+- Tree(count, root)
+- Node(data, left, right)
+- add, get, remove
+
+```javascript
+var Tree = (function () {
+  function Tree() {
+    this.count = 0;
+    this.root;
+  }
+  function Node(data) {
+    this.data = data;
+    this.left;
+    this.right;
+  }
+  function _insert(root, node) {
+    if (!root) return node;
+    if (node.data < root.data) {
+      root.left = _insert(root.left, node);
+      return root;
+    } else {
+      root.right = _insert(root.right, node);
+      return root;
+    }
+    return root;
+  }
+  Tree.prototype.add = function (data) {
+    var node = new Node(data);
+    if (this.count == 0) {
+      this.root = node;
+    } else {
+      _insert(this.root, node);
+    }
+    return ++this.count;
+  };
+  function _get(data, node) {
+    if (node) {
+      if (data < node.data) {
+        return _get(data, node.left);
+      } else if (data > node.data) {
+        return _get(data, node.right);
+      } else {
+        return node;
+      }
+    } else {
+      return null;
+    }
+  }
+  Tree.prototype.get = function (data) {
+    if (this.root) {
+      return _get(data, this.root);
+    } else {
+      return null;
+    }
+  };
+  function _remove(root, data) {
+    var newRoot, exchange, temp;
+    if (!root) return false;
+    if (data < root.data) {
+      root.left = _remove(root.left, data);
+    } else if (data > root.data) {
+      root.right = _remove(root.right, data);
+    } else {
+      if (!root.left) {
+        newRoot = root.right;
+        // root 메모리 정리
+        return newRoot;
+      } else if (!root.right) {
+        newRoot = root.left;
+        // root 메모리 정리
+        return newRoot;
+      } else {
+        exchange = root.left;
+        while (exchange.right) exchange = exchange.right;
+        temp = root.data;
+        root.data = exchange.data;
+        exchange.data = temp;
+        root.left = _remove(root.left, exchange.data);
+      }
+    }
+    return root;
+  }
+  Tree.prototype.remove = function (key) {
+    var node = _remove(this.root, key);
+    if (node) {
+      this.root = node;
+      this.count--;
+      if (this.count == 0) this.root = null;
+    }
+    return true;
+  };
+  return Tree;
+})();
+
+var tree = new Tree();
+tree.add(5); // 1
+tree.add(3); // 2
+tree.add(4); // 3
+tree.add(2); // 4
+tree.add(7); // 5
+tree.add(6); // 6
+tree.root.left.data; // 3
+tree.root.left.left.data; // 2;
+tree.root.left.right.data; // 4
+tree;
+tree.remove(3);
+tree.root.left.data;
+```
+
+---
+
+## 힙
+
+- 출처 : [Zero Cho님 사이트](https://www.zerocho.com/category/Algorithm/post/582de223d4416a001860e763)
+
+```javascript
+```
+
+---
+
+## AVL 트리
+
+- 출처 : [Zero Cho님 사이트](https://www.zerocho.com/category/Algorithm/post/583cacb648a7340018ac73f1)
+
+```javascript
+```
+
+---
+
+## 그래프
+
+- 출처 : [Zero Cho님 사이트](https://www.zerocho.com/category/Algorithm/post/584b9033580277001862f16c)
+
+```javascript
 ```
 
 ---
