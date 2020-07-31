@@ -28,7 +28,7 @@
 ## 알고리즘
 
 - 출처 : [Zero Cho님 사이트](https://www.zerocho.com/category/Algorithm/post/57e22a778d6bcf0015231c8b)
-  [Top](#Table-of-Contents)
+  [Top](#📝-Table-of-Contents)
 
 ---
 
