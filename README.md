@@ -1,4 +1,4 @@
-# ✅ Table of Content
+# 📝 Table of Contents
 
 # 알고리즘
 
