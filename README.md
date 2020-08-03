@@ -2,7 +2,7 @@
 
 # 알고리즘
 
-- [알고리즘](#알고리즘)
+- [알고리즘이란](#알고리즘이란)
 - [시간복잡도](#시간복잡도)
 - [삽입 정렬(Insertion Sort)](#삽입-정렬)
 - [합병(머지,병합) 정렬(Merge Sort)](#합병-정렬)
@@ -11,6 +11,14 @@
 - [퀵 정렬(Quick Sort)](#퀵-정렬)
 - [계수 정렬(Counting Sort)](#계수-정렬)
 - [기수 정렬(Radix Sort)](#기수-정렬)
+- [동적 프로그래밍(Dynamic programming)](#동적-프로그래밍)
+- [탐욕(그리디) 알고리즘(greedy algorithm)](#탐욕-알고리즘)
+- [최소 신장 트리(MST, minimum spanning tree)](#최소-신장-트리)
+- [최단 경로 알고리즘](#최단-경로-알고리즘)
+- [그래프 탐색](#그래프-탐색)
+- [네트워크 플로우(network flow)](#네트워크-플로우)
+  <br>
+- 출처 : [Zero Cho님 사이트](https://www.zerocho.com/category/Algorithm?page=3)
 
 # 자료구조
 
@@ -22,10 +30,13 @@
 - [트리(Tree)](#트리)
 - [AVL 트리(Tree)](#AVL-트리)
 - [그래프(Graph)](#그래프)
+- [해쉬(Hash)](#해쉬)
+  <br>
+- 출처 : [Zero Cho님 사이트](https://www.zerocho.com/category/Algorithm?page=2)
 
 ---
 
-## 알고리즘
+## 알고리즘이란
 
 - 출처 : [Zero Cho님 사이트](https://www.zerocho.com/category/Algorithm/post/57e22a778d6bcf0015231c8b)
   [Top](#알고리즘)
@@ -299,6 +310,60 @@ var radixLSD = function (array, d) {
   return array;
 };
 radixLSD([125, 383, 274, 96, 0, 9, 81, 72], 3); // [0,9,72,81,96,125,274,383]
+```
+
+[Top](#알고리즘)
+
+---
+
+## 동적 프로그래밍
+
+```javascript
+```
+
+[Top](#알고리즘)
+
+---
+
+## 탐욕 알고리즘
+
+```javascript
+```
+
+[Top](#알고리즘)
+
+---
+
+## 최소 신장 트리
+
+```javascript
+```
+
+[Top](#알고리즘)
+
+---
+
+## 최단 경로 알고리즘
+
+```javascript
+```
+
+[Top](#알고리즘)
+
+---
+
+## 그래프 탐색
+
+```javascript
+```
+
+[Top](#알고리즘)
+
+---
+
+## 네트워크 플로우
+
+```javascript
 ```
 
 [Top](#알고리즘)
@@ -642,6 +707,17 @@ tree.root.left.data;
 ---
 
 ## 그래프
+
+- 출처 : [Zero Cho님 사이트](https://www.zerocho.com/category/Algorithm/post/584b9033580277001862f16c)
+
+```javascript
+```
+
+[Top](#알고리즘)
+
+---
+
+## 해쉬
 
 - 출처 : [Zero Cho님 사이트](https://www.zerocho.com/category/Algorithm/post/584b9033580277001862f16c)
 
