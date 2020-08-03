@@ -68,16 +68,15 @@ var insertionSort = function (array) {
     j,
     temp;
   for (i; i < array.length; i++) {
-    temp = array[i]; // 새로운 숫자를 선택한다.
+    temp = array[i]; // 새로운 숫자를 선택함
     for (j = i - 1; j >= 0 && temp < array[j]; j--) {
       // 선택한 숫자를 이미 정렬된 숫자들과 비교하며 넣을 위치를 찾는 과정, 선택한 숫자가 정렬된 숫자보다 작으면
-      array[j + 1] = array[j]; // 한 칸씩 뒤로 밀어낸다.
+      array[j + 1] = array[j]; // 한 칸씩 뒤로 밀어낸다
     }
     array[j + 1] = temp; // 마지막 빈 칸에 선택한 숫자를 넣어준다.
   }
   return array;
 };
-
 insertionSort([5, 6, 1, 2, 4, 3]); // [1, 2, 3, 4, 5, 6]
 ```
 
@@ -133,13 +132,13 @@ var bubbleSort = function (array) {
   var i, j, temp;
   for (i = 0; i < length - 1; i++) {
     // 순차적으로 비교하기 위한 반복문
-    for (j = 0; j < length - 1; j++) {
+    for (j = 0; j < length - 1 - i; j++) {
       // 끝까지 돌았을 때 다시 처음부터 비교하기 위한 반복문
       if (array[j] > array[j + 1]) {
         // 두 수를 비교하여 앞 수가 뒷 수보다 크면
-        temp = array[j]; // 두 수를 서로 바꿔준다. array[j]의 값을
+        temp = array[j]; // 두 수를 서로 바꿔준다
         array[j] = array[j + 1];
-        array[j + 1] = temp; // array[j + 1]로 보낸다.
+        array[j + 1] = temp;
       }
     }
   }
@@ -212,7 +211,7 @@ var partition = function (array, left, right, pivotIndex) {
   }
   temp = array[left];
   array[left] = array[pivotIndex];
-  array[pivotIndex] = temp; // 마지막으로 기준과 만난 수를 바꾸꿔줍니다. 기준의 위치는 이제 i입니다.
+  array[pivotIndex] = temp; // 마지막으로 기준과 만난 수를 바꿔줍니다. 기준의 위치는 이제 i입니다.
   return left;
 };
 
@@ -221,7 +220,7 @@ var quickSort = function (array, left, right) {
   if (!left) left = 0;
   if (!right) right = array.length - 1;
   var pivotIndex = right; // 배열 가장 오른쪽의 수를 기준으로 뽑습니다.
-  pivotIndex = partition(array, left, right - 1, pivotIndex); // right -1 을 하는 이유는 기준 (현재 right)을 제외하고 정렬하기 위함입니다.
+  pivotIndex = partition(array, left, right - 1, pivotIndex); // right - 1을 하는 이유는 기준(현재 right)을 제외하고 정렬하기 위함입니다.
   if (left < pivotIndex - 1) quickSort(array, left, pivotIndex - 1); // 기준 왼쪽 부분 재귀
   if (pivotIndex + 1 < right) quickSort(array, pivotIndex + 1, right); // 기준 오른쪽 부분 재귀
   return array;
@@ -262,7 +261,7 @@ var countingSort = function (array, k) {
   }
   console.log(count, result);
   for (j = 0; j < array.length; j++) {
-    // 누적합이 가리키는 인덱스를 바탕으로 결과에 숫자를 집어넣습니다.
+    // 누적합이 가리키는 인덱스를 바탕으로 결과에 숫자를  집어넣습니다.
     console.log(array[j], count[array[j]] - 1);
     result[count[array[j]] - 1] = array[j];
     count[array[j]] -= 1;
@@ -395,14 +394,14 @@ var LinkedList = (function () {
     var node = new Node(value);
     var current = this.head;
     if (!current) {
-      // 현재 아무도 없으면
+      // 현재 아무 노드도 없으면
       this.head = node; // head에 새 노드를 추가합니다.
       this.length++;
       return node;
     } else {
-      // 이미 노드가 있다면
+      // 이미 노드가 있으면
       while (current.next) {
-        // 마지막 노드를 찾고
+        // 마지막 노드를 찾고.
         current = current.next;
       }
       current.next = node; // 마지막 위치에 노드를 추가합니다.
@@ -502,7 +501,6 @@ var Stack = (function () {
   };
   return Stack;
 })();
-
 var stack = new Stack();
 stack.push(1); // 1
 stack.push(3); // 2
@@ -559,7 +557,6 @@ var Queue = (function () {
   };
   return Queue;
 })();
-
 var queue = new Queue();
 queue.enqueue(1); // 1
 queue.enqueue(3); // 2
@@ -1297,7 +1294,7 @@ function insertTwoWayArc(graph, data, from, to) {
 - 문제 출처 : [프로그래머스](https://programmers.co.kr/learn/challenges?tab=all_challenges)
 - 풀이 출처 : [출처 : kwonh님 Velog](https://velog.io/@kwonh/Algorithm-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4-%EB%A0%88%EB%B2%A81-%ED%92%80%EC%9D%B4-%EB%AA%A8%EC%9D%8C-Javascript)
 
-### [다트게임 2018 KAKAO]
+### [1차] 다트 게임
 
 - 문제 : [프로그래머스](https://programmers.co.kr/learn/courses/30/lessons/17682?language=javascript)
 - 풀이
