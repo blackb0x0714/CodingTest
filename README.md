@@ -34,6 +34,10 @@
   <br>
 - 출처 : [Zero Cho님 사이트](https://www.zerocho.com/category/Algorithm?page=2)
 
+# 프로그래머스 문제풀이
+
+- [Level-1](#Level-1)
+
 ---
 
 ## 알고리즘이란
@@ -686,9 +690,83 @@ tree.root.left.data;
 
 ## 힙
 
-- 출처 : [Zero Cho님 사이트](https://www.zerocho.com/category/Algorithm/post/582de223d4416a001860e763)
+- O(NlgN)
+
+- 출처 : [Zero Cho님 사이트](hhttps://www.zerocho.com/category/Algorithm/post/582de223d4416a001860e763)
 
 ```javascript
+var Heap = (function () {
+  function Heap() {
+    this.arr = [];
+  }
+  function reheapUp(self, idx) {
+    if (idx) {
+      var parent = parseInt((idx - 1) / 2);
+      if (self.arr[idx] > self.arr[parent]) {
+        var temp = self.arr[idx];
+        self.arr[idx] = self.arr[parent];
+        self.arr[parent] = temp;
+        reheapUp(self, parent);
+      }
+    }
+  }
+  function reheapDown(self, idx) {
+    var left = 0;
+    var right = 0;
+    var large;
+    if (idx * 2 + 1 < self.arr.length) {
+      left = self.arr[idx * 2 + 1];
+      if (idx * 2 + 2 < self.arr.length - 1) {
+        right = self.arr[idx * 2 + 2];
+      }
+      if (left > right) {
+        large = idx * 2 + 1;
+      } else {
+        large = idx * 2 + 2;
+      }
+      if (self.arr[idx] < self.arr[large]) {
+        var temp = self.arr[idx];
+        self.arr[idx] = self.arr[large];
+        self.arr[large] = temp;
+        reheapDown(self, large);
+      }
+    }
+  }
+  Heap.prototype.insert = function (number) {
+    var last = this.arr.length;
+    this.arr[last] = number;
+    reheapUp(this, last);
+    return true;
+  };
+  Heap.prototype.delete = function () {
+    if (this.arr.length === 0) {
+      return false;
+    }
+    var del = this.arr[0];
+    this.arr[0] = this.arr.pop();
+    reheapDown(this, 0);
+    return del;
+  };
+  Heap.prototype.sort = function () {
+    var sort = [];
+    var count = this.arr.length;
+    for (var i = 0; i < count; i++) {
+      sort.push(this.delete());
+    }
+    return sort;
+  };
+  return Heap;
+})();
+
+var heap = new Heap();
+heap.insert(5);
+heap.insert(3);
+heap.insert(7);
+heap.insert(4);
+heap.insert(2);
+heap.insert(6);
+heap.insert(1);
+heap.sort(); // [7,6,5,4,3,2,1]
 ```
 
 [Top](#알고리즘)
@@ -697,9 +775,383 @@ tree.root.left.data;
 
 ## AVL 트리
 
+- 정의부
+- 삽입부
+- 삭제부
+- 실행부분
+
 - 출처 : [Zero Cho님 사이트](https://www.zerocho.com/category/Algorithm/post/583cacb648a7340018ac73f1)
 
 ```javascript
+// 1. 정의부
+var AVL = (function () {
+  function AVL() {
+    this.count = 0;
+    this.root;
+    this.taller;
+    this.shorter;
+    this.success;
+  }
+  function Node(data) {
+    this.data = data;
+    this.left;
+    this.right;
+    this.bal = 0; // 왼쪽과 오른쪽의 차이를 저장
+  }
+  // 삽입부 코드를 여기에
+  // 삭제부 코드를 여기에
+  AVL.prototype.insert = function (data) {
+    this.taller = false;
+    var node = new Node(data);
+    this.root = this._insert(this.root, node);
+    this.count++;
+  };
+
+  AVL.prototype.delete = function (key) {
+    this.shorter = false;
+    this.succuess = false;
+    var newRoot = this._delete(this.root, key);
+    if (this.success) {
+      this.root = newRoot;
+      this.count--;
+      return true;
+    }
+    return false;
+  };
+
+  AVL.prototype.search = function (key) {
+    if (this.root) {
+      return this._search(key, this.root);
+    }
+    return false;
+  };
+
+  AVL.prototype._search = function (key, root) {
+    if (root) {
+      if (key < root.data) {
+        return this._search(key, root.left);
+      } else if (key > root.data) {
+        return this._search(key, root.right);
+      } else {
+        return root;
+      }
+    }
+    return;
+  };
+
+  AVL.prototype._rotateLeft = function (root) {
+    var temp = root.right; // temp를 중간 노드로 생각하면 이해하기 쉽다.
+    root.right = temp.left;
+    temp.left = root;
+    return temp;
+  };
+
+  AVL.prototype._rotateRight = function (root) {
+    var temp = root.left; // temp를 중간 노드로 생각하면 이해하기 쉽다.
+    root.left = temp.right;
+    temp.right = root;
+    return temp;
+  };
+
+  return AVL;
+})();
+
+// 2. 삽입부
+AVL.prototype._insert = function (root, node) {
+  // 내부적 insert 메소드
+  if (!root) {
+    // 트리의 말단 부분에 도달하면 바로 넣는다.
+    root = node;
+    this.taller = true;
+    console.log("no root", root);
+    return root;
+  }
+  if (node.data < root.data) {
+    // 새 값이 루트 값보다 작으면
+    root.left = this._insert(root.left, node);
+    console.log("go left", this.taller, root.bal);
+    if (this.taller) {
+      // 삽입으로 인해서 한 쪽이 더 길어졌으면
+      switch (root.bal) {
+        case 1: // 왼쪽이 더 긴 상태에서 또 왼쪽에 넣어줬으므로 LL 또는 RL
+          root = this._insLeftBal(root);
+          break;
+        case 0: // 균형이었던 상태에서 왼쪽에 넣어줬으므로 왼쪽이 길어짐
+          root.bal = 1;
+          break;
+        case -1: // 오른쪽이 길었던 상태에서 왼쪽에 넣어줬기 때문에 균형
+          root.bal = 0;
+          this.taller = false;
+          break;
+      }
+    }
+    return root;
+  } else {
+    // 새 값이 루트 값보다 크면
+    root.right = this._insert(root.right, node);
+    console.log("go right", this.taller, root.bal);
+    if (this.taller) {
+      // 삽입으로 인해서 한 쪽이 더 길어졌으면
+      switch (root.bal) {
+        case 1: // 왼쪽이 긴 상태에서 오른쪽에 넣어줬기 때문에 균형
+          root.bal = 0;
+          this.taller = false;
+          break;
+        case 0: // 균형이었던 상태에서 오른쪽에 넣어줬기 때문에 오른쪽이 길어짐
+          root.bal = -1;
+          break;
+        case -1: // 오른쪽이 긴 상태에서 또 오른쪽에 넣어줬으므로 RR 또는 LR
+          root = this._insRightBal(root);
+          break;
+      }
+    }
+    return root;
+  }
+};
+
+AVL.prototype._insLeftBal = function (root) {
+  var left = root.left;
+  console.log("insLeftBal", left.bal);
+  switch (left.bal) {
+    case 1: // LL의 경우입니다.
+      root.bal = 0;
+      left.bal = 0;
+      root = this._rotateRight(root); // 우회전 한 번
+      this.taller = false;
+      break;
+    case 0: // 균형인 경우는 없습니다.
+      throw new Error("불가능한 경우");
+    case -1: // RL의 경우입니다.
+      var right = left.right;
+      switch (right.bal) {
+        case 1:
+          root.bal = -1;
+          left.bal = 0;
+          break;
+        case 0:
+          root.bal = 0;
+          left.bal = 1;
+          break;
+        case -1:
+          root.bal = 0;
+          left.bal = 1;
+          break;
+      }
+      right.bal = 0;
+      root.left = this._rotateLeft(left); // 좌회전 후
+      root = this._rotateRight(root); // 우회전
+      this.taller = false;
+  }
+};
+
+AVL.prototype._insRightBal = function (root) {
+  var right = root.right;
+  console.log("insRightBal", right.bal);
+  switch (right.bal) {
+    case -1: // RR의 경우입니다.
+      root.bal = 0;
+      right.bal = 0;
+      root = this._rotateLeft(root); // 좌회전 한 번
+      this.taller = false;
+      break;
+    case 0: // 균형일 수는 없습니다.
+      throw new Error("불가능한 경우");
+    case 1:
+      var left = right.left;
+      switch (
+        left.bal // LR의 경우입니다.
+      ) {
+        case 1:
+          root.bal = -1;
+          right.bal = 0;
+          break;
+        case 0:
+          root.bal = 0;
+          right.bal = 1;
+          break;
+        case -1:
+          root.bal = 0;
+          right.bal = 1;
+          break;
+      }
+      left.bal = 0;
+      root.right = this._rotateRight(right); // 우회전 후
+      root = this._rotateLeft(root); // 좌회전
+      this.taller = false;
+  }
+  return root;
+};
+
+// 3. 삭제부
+AVL.prototype._delete = function (root, key) {
+  if (!root) {
+    // 지울 게 없습니다.
+    console.log("no root to delete");
+    this.shorter = false;
+    this.success = false;
+    return;
+  }
+  if (key < root.data) {
+    // 지울 값이 루트 값보다 작으면
+    root.left = this._delete(root.left, key);
+    console.log("go left", root.left, this.shorter);
+    if (this.shorter) {
+      // 삭제로 인해 짧아졌으면
+      root = this._delRightBal(root);
+    }
+  } else if (key > root.data) {
+    // 지울 값이 루트 값보다 크면
+    root.right = this._delete(root.right, key);
+    console.log("go right", root.right, this.shorter);
+    if (this.shorter) {
+      // 삭제로 인해 짧아졌으면
+      root = this._delLeftBal(root);
+    }
+  } else {
+    // key와 일치하는 데이터를 찾았을 때
+    console.log("found", key, root);
+    if (!root.right) {
+      // 오른쪽 자식이 없으면 노드가 제거됐을 때 왼쪽 자식이 루트
+      var newRoot = root.left;
+      this.success = true;
+      this.shorter = true;
+      return newRoot;
+    } else if (!root.left) {
+      // 왼쪽 자식이 없으면 노드가 제거됐을 때 오른쪽 자식이 루트
+      var newRoot = root.right;
+      this.success = true;
+      this.shorter = true;
+      return newRoot;
+    } else {
+      // 삭제할 노드를 계속 왼쪽으로 보내서 제거(트리 강좌 참고)
+      var temp = root.left;
+      while (temp.right) temp = temp.right;
+      root.data = temp.data;
+      root.left = this._delete(root.left, temp.data);
+      if (this.shorter) {
+        // 삭제로 짧아졌으면
+        root = this._delRightBal(root);
+      }
+    }
+  }
+  return root;
+};
+
+AVL.prototype._delLeftBal = function (root) {
+  console.log("delLeftBal", root, root.bal, root.left);
+  switch (root.bal) {
+    case 1:
+      root.bal = 0;
+      break;
+    case 0:
+      root.bal = -1;
+      this.shorter = false;
+      break;
+    case -1:
+      var left = root.left;
+      if (left.bal === 1) {
+        // RL의 경우
+        var right = left.right;
+        switch (right.bal) {
+          case 1:
+            left.bal = -1;
+            root.bal = 0;
+            break;
+          case 0:
+            root.bal = 0;
+            left.bal = 0;
+            break;
+          case -1:
+            root.bal = 1;
+            left.bal = 0;
+            break;
+        }
+        right.bal = 0;
+        root.left = this._rotateLeft(left);
+        root = this._rotateRight(root);
+      } else {
+        // LL의 경우
+        switch (left.bal) {
+          case -1:
+            root.bal = 0;
+            left.bal = 0;
+            break;
+          case 0:
+            root.bal = -1;
+            left.bal = 1;
+            this.shorter = false;
+            break;
+        }
+        root = this._rotateRight(root);
+      }
+  }
+  return root;
+};
+
+AVL.prototype._delRightBal = function (root) {
+  console.log("delRightBal", root, root.bal);
+  switch (root.bal) {
+    case 1:
+      root.bal = 0;
+      break;
+    case 0:
+      root.bal = -1;
+      this.shorter = false;
+      break;
+    case -1:
+      right = root.right;
+      if (right.bal === 1) {
+        // LR의 경우입니다.
+        left = right.left;
+        console.log("delRightBal LR", left.bal);
+        switch (left.bal) {
+          case 1:
+            right.bal = -1;
+            root.bal = 0;
+            break;
+          case 0:
+            root.bal = 0;
+            right.bal = 0;
+            break;
+          case -1:
+            root.bal = 1;
+            right.bal = 0;
+            break;
+        }
+        left.bal = 0;
+        root.right = this._rotateRight(right);
+        root = this._rotateLeft(root);
+      } else {
+        // RR의 경우입니다.
+        console.log("delRightBal RR", right.bal);
+        switch (right.bal) {
+          case 0:
+            root.bal = -1;
+            right.bal = -1;
+            this.shorter = false;
+            break;
+          case -1:
+            root.bal = 0;
+            right.bal = 0;
+            break;
+        }
+        root = this._rotateLeft(root);
+      }
+  }
+  return root;
+};
+
+// 4. 실행부분
+var avlTree = new AVL(); // 한 줄씩 치면서 어떻게 트리가 변하나 확인해보세요.
+avlTree.insert(8);
+avlTree.insert(12);
+avlTree.insert(14);
+avlTree.insert(18);
+avlTree.insert(20);
+avlTree.insert(23);
+avlTree.insert(44);
+avlTree.insert(52);
+avlTree.delete(20);
 ```
 
 [Top](#알고리즘)
@@ -711,6 +1163,118 @@ tree.root.left.data;
 - 출처 : [Zero Cho님 사이트](https://www.zerocho.com/category/Algorithm/post/584b9033580277001862f16c)
 
 ```javascript
+var Graph = (function () {
+  function Vertex(key) {
+    this.next = null;
+    this.arc = null;
+    this.key = key;
+    this.inTree = null;
+  }
+  function Arc(data, dest, capacity) {
+    this.nextArc = null;
+    this.destination = dest;
+    this.data = data;
+    this.capacity = capacity;
+    this.inTree = null;
+  }
+  function Graph() {
+    this.count = 0;
+    this.first = null;
+  }
+  Graph.prototype.insertVertex = function (key) {
+    var vertex = new Vertex(key);
+    var last = this.first;
+    if (last) {
+      while (last.next !== null) {
+        last = last.next;
+      }
+      last.next = vertex;
+    } else {
+      this.first = vertex;
+    }
+    this.count++;
+  };
+  Graph.prototype.deleteVertex = function (key) {
+    var vertex = this.first;
+    var prev = null;
+    while (vertex.key !== key) {
+      prev = vertex;
+      vertex = vertex.next;
+    }
+    if (!vertex) return false;
+    if (!vertex.arc) return false;
+    if (prev) {
+      prev.next = vertex.next;
+    } else {
+      this.first = vertex.next;
+    }
+    this.count--;
+  };
+  Graph.prototype.insertArc = function (data, fromKey, toKey, capacity) {
+    var from = this.first;
+    var to = this.first;
+    while (from && from.key !== fromKey) {
+      from = from.next;
+    }
+    while (to && to.key !== toKey) {
+      to = to.next;
+    }
+    if (!from || !to) return false;
+    var arc = new Arc(data, to, capacity);
+    var fromLast = from.arc;
+    if (fromLast) {
+      while (fromLast.nextArc != null) {
+        fromLast = fromLast.nextArc;
+      }
+      fromLast.nextArc = arc;
+    } else {
+      from.arc = arc;
+    }
+  };
+  Graph.prototype.deleteArc = function (fromKey, toKey) {
+    var from = this.first;
+    while (from !== null) {
+      if (from.key === fromKey) break;
+      from = from.next;
+    }
+    if (!from) return false;
+    var fromArc = from.arc;
+    var preArc;
+    while (fromArc !== null) {
+      if (toKey === fromArc.destination.key) break;
+      preArc = fromArc;
+      fromArc = fromArc.next;
+    }
+    if (!fromArc) return false;
+    if (preArc) {
+      preArc.nextArc = fromArc.nextArc;
+    } else {
+      from.arc = fromArc.nextArc;
+    }
+  };
+  return Graph;
+})();
+
+var graph = new Graph();
+graph.insertVertex("A");
+graph.insertVertex("B");
+graph.insertVertex("C");
+graph.insertVertex("D");
+graph.insertVertex("E");
+graph.insertVertex("F");
+graph.insertArc(1, "A", "B");
+graph.insertArc(1, "B", "C");
+graph.insertArc(1, "B", "E");
+graph.insertArc(1, "C", "E");
+graph.insertArc(1, "C", "D");
+graph.insertArc(1, "E", "D");
+graph.insertArc(1, "E", "F");
+
+/* 무방향 그래프
+function insertTwoWayArc(graph, data, from, to) {
+  graph.insertArc(data, from, to);
+  graph.insertArc(data, to, from);
+} */
 ```
 
 [Top](#알고리즘)
@@ -719,10 +1283,51 @@ tree.root.left.data;
 
 ## 해쉬
 
-- 출처 : [Zero Cho님 사이트](https://www.zerocho.com/category/Algorithm/post/584b9033580277001862f16c)
+- 출처 : [Evan Moon님 사이트](https://evan-moon.github.io/2019/06/25/hashtable-with-js/)
 
 ```javascript
 ```
+
+[Top](#알고리즘)
+
+---
+
+## Level-1
+
+- 문제 출처 : [프로그래머스](https://programmers.co.kr/learn/challenges?tab=all_challenges)
+- 풀이 출처 : [출처 : kwonh님 Velog](https://velog.io/@kwonh/Algorithm-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4-%EB%A0%88%EB%B2%A81-%ED%92%80%EC%9D%B4-%EB%AA%A8%EC%9D%8C-Javascript)
+
+### [다트게임 2018 KAKAO]
+
+- 문제 : [프로그래머스](https://programmers.co.kr/learn/courses/30/lessons/17682?language=javascript)
+- 풀이
+
+```javascript
+function solution(dartResult) {
+  let origin = [...dartResult].reduce((arr, v, i) => {
+    if (v === "0" && arr[i - 1] === "1") return [...arr, "10"];
+    if (v === "1" && arr[i + 1] === "0") return [...arr];
+    return [...arr, v];
+  }, []);
+  let scores = [];
+  origin.forEach((v, i) => {
+    const len = scores.length;
+    if (v === "S") scores.push(origin[i - 1] / 1);
+    if (v === "D") scores.push(Math.pow(origin[i - 1] / 1, 2));
+    if (v === "T") scores.push(Math.pow(origin[i - 1] / 1, 3));
+    if (v === "*") {
+      const hasBefore = len >= 2;
+      if (hasBefore) scores[len - 2] = scores[len - 2] * 2;
+      scores[len - 1] = scores[len - 1] * 2;
+    }
+    if (v === "#") scores[len - 1] = scores[len - 1] - 2 * scores[len - 1];
+  });
+  return scores.reduce((accum, v) => accum + v, 0);
+}
+```
+
+- 매개변수 dartResult에서 넘어오는 문자열에서 10점을 분리하는 과정(1-9는 한 자리, 10은 두 자리)을 거치지 않아 수정이 필요했었다.
+- 처음 만들었을 때 세 개의 배열 SDT, options, scores로 각각 분리한 뒤 처리하는 로직으로 만들었는데 비효율적인 것 같아 최대한 배열생성을 자제하며 수정했다.
 
 [Top](#알고리즘)
 
