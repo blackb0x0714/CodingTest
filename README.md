@@ -726,7 +726,7 @@ graph.bfs(); // A, X, G, H, P, E, M, Y, J
 
 ## 네트워크 플로우
 
-- 출처 : [Zero Cho님 사이트]https://www.zerocho.com/category/Algorithm/post/5893405b588acb00186d39e0)
+- 출처 : [Zero Cho님 사이트](https://www.zerocho.com/category/Algorithm/post/5893405b588acb00186d39e0)
 
 ```javascript
 Graph.prototype.fordFulkerson = function(start, end) {
