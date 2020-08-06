@@ -321,7 +321,93 @@ radixLSD([125, 383, 274, 96, 0, 9, 81, 72], 3); // [0,9,72,81,96,125,274,383]
 
 ## 동적 프로그래밍
 
+- 출처 : [Zero Cho님 사이트](https://www.zerocho.com/category/Algorithm/post/584b979a580277001862f182)
+
+- 막대기 자르기
+
 ```javascript
+var p = [0, 1, 5, 8, 9, 10, 17, 17, 20, 24, 30];
+function cutRod(p, n) {
+  var r = [0];
+  for (var j = 1; j <= n; j++) {
+    q = -1;
+    for (var i = 1; i <= j; i++) {
+      q = Math.max(q, p[i] + r[j - i]);
+    }
+    r[j] = q;
+  }
+  return r[n];
+}
+cutRod(p, 2); // 5
+cutRod(p, 3); // 8
+cutRod(p, 4); // 10
+cutRod(p, 7); // 18
+```
+
+- 최장 공통 부분 수열 문제
+
+```javascript
+function LCS(x, y) {
+  var i = x.length;
+  var j = y.length;
+  var result = [];
+  for (var k = 0; k <= i; k++) {
+    if (!result[k]) {
+      result[k] = []; // 이전 계산 값 저장 공간
+    }
+  }
+  for (k = 0; k <= i; k++) {
+    for (var l = 0; l <= j; l++) {
+      console.log(k, l);
+      if (k === 0 || l === 0) {
+        // 베이스 값 설정
+        result[k][l] = 0;
+      } else if (x[k - 1] === y[l - 1]) {
+        // 마지막 두 문자 비교, 같으면
+        result[k][l] = result[k - 1][l - 1] + 1;
+      } else {
+        // 마지막 두 문자가 다르면
+        result[k][l] = Math.max(result[k - 1][l], result[k][l - 1]);
+      }
+    }
+  }
+  return result[i][j];
+}
+LCS("ABCBDAB", "BDCABA"); // 4
+```
+
+- 0/1 배낭 문제
+
+```javascript
+var item = [
+  [1, 60, 10],
+  [2, 100, 20],
+  [3, 120, 30],
+];
+function zeroOneKnapsack(item, cap) {
+  var m = [];
+  for (var i = 0; i <= item.length; i++) {
+    m[i] = [];
+  }
+  for (i = 0; i < item.length + 1; i++) {
+    for (var j = 0; j <= cap; j++) {
+      if (i === 0 || j === 0) {
+        // 물건이나 무게가 없음
+        m[i][j] = 0;
+      } else if (item[i - 1][2] > j) {
+        // 물건의 무게가 j보다 크면
+        m[i][j] = m[i - 1][j];
+      } else {
+        m[i][j] = Math.max(
+          m[i - 1][j],
+          m[i - 1][j - item[i - 1][2]] + item[i - 1][1]
+        );
+      }
+    }
+  }
+  return m[item.length][cap];
+}
+zeroOneKnapsack(item, 50); // 220
 ```
 
 [Top](#알고리즘)
@@ -330,7 +416,75 @@ radixLSD([125, 383, 274, 96, 0, 9, 81, 72], 3); // [0,9,72,81,96,125,274,383]
 
 ## 탐욕 알고리즘
 
+- 출처 : [Zero Cho님 사이트](https://www.zerocho.com/category/Algorithm/post/584ba5c9580277001862f188)
+
+- 활동 선택 문제
+
 ```javascript
+var activity = [
+  [1, 1, 3],
+  [2, 2, 5],
+  [3, 4, 7],
+  [4, 1, 8],
+  [5, 5, 9],
+  [6, 8, 10],
+  [7, 9, 11],
+  [8, 11, 14],
+  [9, 13, 16],
+];
+function activitySelection(act) {
+  var result = [];
+  var sorted = act.sort(function (prev, cur) {
+    return prev[2] - cur[2]; // 끝나는 시간 순으로 정렬
+  });
+  var last = 0;
+  sorted.forEach(function (item) {
+    if (last < item[1]) {
+      // 조건 만족 시 결과 집합에 추가
+      last = item[2];
+      result.push(item);
+    }
+  });
+  return result.map(function (r) {
+    return r[0]; // map을 한 이유는 그냥 몇 번째 행동이 선택되었는지 보여주기 위함.
+  });
+}
+activitySelection(activity); // [1, 3, 6, 8]
+```
+
+- 분할 가능 배낭 문제
+
+```javascript
+var test = [
+  [1, 60, 10],
+  [2, 100, 20],
+  [3, 120, 30],
+];
+function fractionalKnapsack(item, w) {
+  var sorted = item.sort(function (prev, cur) {
+    return cur[1] / cur[2] - prev[1] / prev[2]; // 무게 대비 가치 순으로 정렬
+  });
+  var limit = w;
+  var result = 0;
+  for (var i = 0; i < sorted.length; i++) {
+    var cur = sorted[i];
+    if (limit > 0) {
+      if (limit >= cur[2]) {
+        // 물건 무게가 제한 이하일 경우
+        limit -= cur[2];
+        result += cur[1];
+      } else {
+        // 물건 무게가 제한 초과일 경우
+        result += (cur[1] / cur[2]) * limit; // 잘라서 넣음
+        limit = 0;
+      }
+    } else {
+      break;
+    }
+  }
+  return result;
+}
+fractionalKnapsack(test, 50); // 240
 ```
 
 [Top](#알고리즘)
@@ -339,7 +493,87 @@ radixLSD([125, 383, 274, 96, 0, 9, 81, 72], 3); // [0,9,72,81,96,125,274,383]
 
 ## 최소 신장 트리
 
+- 출처 : [Zero Cho님 사이트](https://www.zerocho.com/category/Algorithm/post/584bcd42580277001862f1a7)
+
+- 프림 알고리즘
+
 ```javascript
+Graph.prototype.mst = function () {
+  var first = this.first;
+  var inTreeCount = 0;
+  while (first) {
+    // 모든 inTree를 false로 초기화
+    first.inTree = false;
+    var arc = first.arc;
+    while (arc) {
+      arc.inTree = false;
+      arc = arc.nextArc;
+    }
+    first = first.next;
+  }
+  this.first.inTree = true; // 첫 버텍스를 MST에 넣습니다.
+  inTreeCount++;
+  console.log("%s 버텍스가 추가되었습니다.", this.first.key);
+  var temp = this.first;
+  var current;
+  var minArc; // 최소 아크를 저장
+  var minTemp; // 최소 아크의 출발 버텍스를 저장
+  while (inTreeCount != this.count) {
+    // 모든 버텍스를 추가할 때까지
+    while (temp) {
+      current = temp;
+      temp = temp.next;
+      if (!current.inTree) continue;
+      arc = current.arc;
+      while (arc) {
+        if (!arc.destination.inTree) {
+          if (!minArc) minArc = arc;
+          if (minArc.data > arc.data) {
+            // 기존 최솟값보다 더 작은 값을 찾았을 때
+            minArc = arc; // 최소 아크를 찾음
+            minTemp = current; // 최소 아크의 출발 버텍스 저장
+          }
+        }
+        arc = arc.nextArc;
+      }
+    }
+    minArc.destination.inTree = true;
+    minArc.inTree = true;
+    inTreeCount++;
+    console.log(
+      "%s 버텍스에서 %s 버텍스로 향하는 가중치 %d의 아크가 추가되었습니다.",
+      minTemp.key,
+      minArc.destination.key,
+      minArc.data
+    );
+    minArc = null;
+    temp = this.first;
+  }
+};
+
+var graph = new Graph();
+graph.insertVertex("A");
+graph.insertVertex("B");
+graph.insertVertex("C");
+graph.insertVertex("D");
+graph.insertVertex("E");
+graph.insertVertex("F");
+insertTwoWayArc(graph, 6, "A", "B");
+insertTwoWayArc(graph, 3, "A", "C");
+insertTwoWayArc(graph, 2, "B", "C");
+insertTwoWayArc(graph, 5, "B", "D");
+insertTwoWayArc(graph, 3, "C", "D");
+insertTwoWayArc(graph, 4, "C", "E");
+insertTwoWayArc(graph, 2, "D", "E");
+insertTwoWayArc(graph, 3, "D", "F");
+insertTwoWayArc(graph, 5, "E", "F");
+graph.mst();
+// A 버텍스가 추가되었습니다.
+// A 버텍스에서 C 버텍스로 향하는 가중치 3의 아크가 추가되었습니다.
+// C 버텍스에서 B 버텍스로 향하는 가중치 2의 아크가 추가되었습니다.
+// C 버텍스에서 D 버텍스로 향하는 가중치 3의 아크가 추가되었습니다.
+// D 버텍스에서 E 버텍스로 향하는 가중치 2의 아크가 추가되었습니다.
+// D 버텍스에서 F 버텍스로 향하는 가중치 3의 아크가 추가되었습니다.
 ```
 
 [Top](#알고리즘)
@@ -348,7 +582,72 @@ radixLSD([125, 383, 274, 96, 0, 9, 81, 72], 3); // [0,9,72,81,96,125,274,383]
 
 ## 최단 경로 알고리즘
 
+- 출처 : [Zero Cho님 사이트](https://www.zerocho.com/category/Algorithm/post/584bd46f580277001862f1af)
+
+- 다익스트라 알고리즘
+
 ```javascript
+Graph.prototype.shortest = function (startKey) {
+  var from = this.first;
+  while (from) {
+    if (from.key === startKey) {
+      break;
+    }
+    from = from.next;
+  }
+  console.log("시작점은 %s입니다", from.key);
+  var temp = this.first;
+  var current;
+  var arc;
+  while (temp) {
+    // 모든 버텍스 최단거리를 Infinity로 초기화
+    temp.distance = Infinity;
+    temp = temp.next;
+  }
+  temp = this.first;
+  temp.distance = 0;
+  while (temp) {
+    // 반복문을 돌며 최단 거리를 찾음
+    current = temp;
+    temp = temp.next;
+    arc = current.arc;
+    while (arc) {
+      if (arc.destination.distance > current.distance + arc.data) {
+        arc.destination.distance = current.distance + arc.data;
+      }
+      arc = arc.nextArc;
+    }
+  }
+  temp = this.first;
+  while (temp) {
+    console.log("%s까지의 최단 거리는 %d입니다", temp.key, temp.distance);
+    temp = temp.next;
+  }
+};
+
+var graph = new Graph();
+graph.insertVertex("A");
+graph.insertVertex("B");
+graph.insertVertex("C");
+graph.insertVertex("D");
+graph.insertVertex("E");
+graph.insertVertex("F");
+insertTwoWayArc(graph, 6, "A", "B");
+insertTwoWayArc(graph, 3, "A", "C");
+insertTwoWayArc(graph, 2, "B", "C");
+insertTwoWayArc(graph, 5, "B", "D");
+insertTwoWayArc(graph, 3, "C", "D");
+insertTwoWayArc(graph, 4, "C", "E");
+insertTwoWayArc(graph, 2, "D", "E");
+insertTwoWayArc(graph, 3, "D", "F");
+insertTwoWayArc(graph, 5, "E", "F");
+graph.shortest("A");
+// A까지의 최단 거리는 0입니다.
+// B까지의 최단 거리는 5입니다.
+// C까지의 최단 거리는 3입니다.
+// D까지의 최단 거리는 6입니다.
+// E까지의 최단 거리는 7입니다.
+// F까지의 최단 거리는 9입니다.
 ```
 
 [Top](#알고리즘)
@@ -357,7 +656,68 @@ radixLSD([125, 383, 274, 96, 0, 9, 81, 72], 3); // [0,9,72,81,96,125,274,383]
 
 ## 그래프 탐색
 
+- 출처 : [Zero Cho님 사이트](https://www.zerocho.com/category/Algorithm/post/5870153c37e1c80018b64eb0)
+
+- DFS
+
 ```javascript
+Graph.prototype.dfs = function () {
+  var stack = new Stack();
+  var temp = this.first;
+  while (temp) {
+    temp.inTree = false;
+    temp = temp.next;
+  }
+  temp = this.first;
+  stack.push(temp); // 스택에 첫 버텍스를 넣음
+  temp.inTree = true;
+  while (stack.count) {
+    // 탐색을 완료할 때까지
+    temp = stack.pop(); // 넣었던 버텍스를 하나씩 꺼냄
+    console.log(temp.key);
+    temp.inTree = true;
+    var arc = temp.arc;
+    while (arc) {
+      if (!arc.destination.inTree) {
+        stack.push(arc.destination); // 꺼낸 것과 연결된 버텍스들을 스택에 넣음
+        arc.destination.inTree = true;
+      }
+      arc = arc.nextArc;
+    }
+  }
+};
+graph.dfs(); // A, X, H, P, E, Y, M, J, G
+```
+
+- BFS
+
+```javascript
+Graph.prototype.bfs = function () {
+  var queue = new Queue();
+  var temp = this.first;
+  while (temp) {
+    temp.inTree = false;
+    temp = temp.next;
+  }
+  temp = this.first;
+  queue.enqueue(temp); // 첫 버텍스를 큐에 넣음
+  temp.inTree = true;
+  while (queue.count) {
+    // 탐색을 완료할 때까지
+    temp = queue.dequeue(); // 큐에서 하나씩 꺼냄
+    console.log(temp.key);
+    temp.inTree = true;
+    var arc = temp.arc;
+    while (arc) {
+      if (!arc.destination.inTree) {
+        queue.enqueue(arc.destination); // 꺼낸 것과 연결된 버텍스들을 큐에 넣음
+        arc.destination.inTree = true;
+      }
+      arc = arc.nextArc;
+    }
+  }
+};
+graph.bfs(); // A, X, G, H, P, E, M, Y, J
 ```
 
 [Top](#알고리즘)
@@ -366,7 +726,113 @@ radixLSD([125, 383, 274, 96, 0, 9, 81, 72], 3); // [0,9,72,81,96,125,274,383]
 
 ## 네트워크 플로우
 
+- 출처 : [Zero Cho님 사이트]https://www.zerocho.com/category/Algorithm/post/5893405b588acb00186d39e0)
+
 ```javascript
+Graph.prototype.fordFulkerson = function(start, end) {
+  function ReArc(data, dest) { // 잔여 아크 생성자 선언
+    this.data = data || 0;
+    this.destination = dest;
+    this.reverse = null;
+  }
+  var vertex = this.first;
+  while (vertex) { // 모든 아크에 잔여 아크를 추가하는 작업
+    var arc = vertex.arc;
+    while (arc) {
+      var reArc = new ReArc(arc.capacity - arc.data, arc.destination);
+      var reArc2 = new ReArc(arc.data, vertex);
+      reArc.reverse = reArc2; // 두 잔여 아크는 서로 역방향의 관계
+      reArc2.reverse = reArc;
+      vertex.residual = vertex.residual || [];
+      vertex.residual.push(reArc);
+      arc.destination.residual = arc.destination.residual || [];
+      arc.destination.residual.push(reArc2);
+      arc = arc.nextArc;
+    }
+    vertex = vertex.next;
+  }
+  var self = this;
+
+  function findArcInPath(path, reArc, start) { // 잔여 아크가 이미 지나온 경로 안에 있는지 찾는 함수
+    for (var i = 0; i < path.length; i++) {
+      if (path[i][0] === reArc || reArc.destination === path[i][2]) {
+         return true;
+      }
+    }
+    return false;
+  }
+
+  function findPath(from, to, path) { // 잔여 네트워크의 경로를 재귀적으로 찾는 함수
+    if (from === to) return path;
+    vertex = self.first;
+    var reArcs;
+    var arc;
+    while (vertex) {
+      if (vertex.key === from)
+        reArcs = vertex.residual;
+        arc = vertex.arc;
+        break;
+      }
+      vertex = vertex.next;
+    }
+    for (var i = 0; i < reArcs.length; i++) { // 잔여 아크 전체를 탐색
+      var residual = reArcs[i].data;
+      if (residual > 0 && !findArcInPath(path, reArcs[i], vertex)) { // 잔여 아크 용량이 1 이상이고 지나온 패스에 없으면
+         var pathCopy = path.slice();
+         pathCopy.push([reArcs[i], arc, vertex]);
+        var result = findPath(reArcs[i].destination.key, to, pathCopy); // 재귀적으로 다음 패스를 찾음
+        if (result) return result;
+      }
+    }
+    return null;
+  }
+
+  var path = findPath(start, end, []);
+  while (path) { // 잔여 네트워크에 경로가 없을 때까지 반복적으로 찾고 증강
+    var flow = Infinity;<
+    for (var i = 0; i < path.length; i++) {
+      if (path[i][0].data < flow) flow = path[i][0].data; // 추가할 수 있는 물의 양 찾기
+    }
+    for (var i = 0; i < path.length; i++) {
+      path[i][0].data -= flow; // 잔여 아크에 흐름 뺌
+      path[i][0].reverse.data += flow; // 잔여 역아크에 흐름 추가
+      path[i][1].data += flow; // 아크에 흐름 추가
+    }
+    path = findPath(start, end, []);
+  }
+  var sum = 0;
+  vertex = self.first;
+  while (vertex) { // 마지막으로 시작점의 유량을 체크하면
+    if (vertex.key === start) {
+      arc = vertex.arc;
+      while (arc) {
+        sum += arc.data;
+        arc = arc.nextArc;
+      }
+      break;
+    }
+    vertex = vertex.next;
+  }
+  return sum;
+};
+
+var graph = new Graph();
+graph.insertVertex('s');
+graph.insertVertex('w');
+graph.insertVertex('y');
+graph.insertVertex('x');
+graph.insertVertex('z');
+graph.insertVertex('t');
+graph.insertArc(1, 's', 'w', 3);
+graph.insertArc(2, 'w', 'x', 2);
+graph.insertArc(2, 'x', 't', 3);
+graph.insertArc(2, 's', 'y', 2);
+graph.insertArc(1, 'y', 'w', 3);
+graph.insertArc(1, 'x', 'y', 1);
+graph.insertArc(2, 'y', 'z', 3);
+graph.insertArc(1, 'z', 'x', 3);
+graph.insertArc(1, 'z', 't', 2);
+graph.fordFulkerson('s', 't'); // 4
 ```
 
 [Top](#알고리즘)
