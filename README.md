@@ -34,6 +34,13 @@
   <br>
 - 출처 : [Zero Cho님 사이트](https://www.zerocho.com/category/Algorithm?page=2)
 
+# JS 100제
+
+- [문제 1~50](https://www.notion.so/JS-100-1-0465a498481c471488646526a181087f)
+- [문제 51~100](https://www.notion.so/JS-100-2-327372e894a843cf9c9430070c1ce5da)
+  <br>
+- 출처 : [제주코딩베이스캠프]](https://www.notion.so/JS-100-94d97d294dd14c9b911a02c840fa9f2d)
+
 # 프로그래머스 문제풀이
 
 - [Level-1](#Level-1)
@@ -1758,7 +1765,7 @@ function insertTwoWayArc(graph, data, from, to) {
 ## Level-1
 
 - 문제 출처 : [프로그래머스](https://programmers.co.kr/learn/challenges?tab=all_challenges)
-- 풀이 출처 : [출처 : kwonh님 Velog](https://velog.io/@kwonh/Algorithm-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4-%EB%A0%88%EB%B2%A81-%ED%92%80%EC%9D%B4-%EB%AA%A8%EC%9D%8C-Javascript)
+- 풀이 출처 : [kwonh님 Velog](https://velog.io/@kwonh/Algorithm-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4-%EB%A0%88%EB%B2%A81-%ED%92%80%EC%9D%B4-%EB%AA%A8%EC%9D%8C-Javascript)
 
 ### [1차] 다트 게임
 
