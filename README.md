@@ -38,6 +38,10 @@
 - [정리](https://www.notion.so/a5a0fafe306e4cb78ec4476a272d156d?v=e116f6cdc6e34075bf8e4c0e56429a26)
 - 출처 : [제주코딩베이스캠프](https://www.notion.so/JS-100-94d97d294dd14c9b911a02c840fa9f2d)
 
+# 질문연습
+
+- [Layout](https://ojayyezzir.tistory.com/6?category=374523)
+
 # 프로그래머스 문제풀이
 
 - [Level-1](#Level-1)
