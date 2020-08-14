@@ -38,13 +38,14 @@
 - [정리](https://www.notion.so/a5a0fafe306e4cb78ec4476a272d156d?v=e116f6cdc6e34075bf8e4c0e56429a26)
 - 출처 : [제주코딩베이스캠프](https://www.notion.so/JS-100-94d97d294dd14c9b911a02c840fa9f2d)
 
-# 질문연습
-
-- [Layout](https://ojayyezzir.tistory.com/6?category=374523)
+# 면접질문
+- [자료1](https://realmojo.tistory.com/300)
+- [자료2](https://sunnykim91.tistory.com/121)
+- [자료3](https://ojayyezzir.tistory.com/6?category=374523)
 
 # 프로그래머스 문제풀이
 
-- [Level-1](#Level-1)
+- [Level-1](https://kowoohyuk.tistory.com/41)
 
 ---
 
@@ -1901,47 +1902,6 @@ function insertTwoWayArc(graph, data, from, to) {
 
 ```javascript
 ```
-
-[Top](#알고리즘)
-
----
-
-## Level-1
-
-- 문제 출처 : [프로그래머스](https://programmers.co.kr/learn/challenges?tab=all_challenges)
-- 풀이 출처 : [kwonh님 Velog](https://velog.io/@kwonh/Algorithm-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4-%EB%A0%88%EB%B2%A81-%ED%92%80%EC%9D%B4-%EB%AA%A8%EC%9D%8C-Javascript)
-
-### [1차] 다트 게임
-
-- 문제 : [프로그래머스](https://programmers.co.kr/learn/courses/30/lessons/17682?language=javascript)
-- 풀이
-
-```javascript
-function solution(dartResult) {
-  let origin = [...dartResult].reduce((arr, v, i) => {
-    if (v === "0" && arr[i - 1] === "1") return [...arr, "10"];
-    if (v === "1" && arr[i + 1] === "0") return [...arr];
-    return [...arr, v];
-  }, []);
-  let scores = [];
-  origin.forEach((v, i) => {
-    const len = scores.length;
-    if (v === "S") scores.push(origin[i - 1] / 1);
-    if (v === "D") scores.push(Math.pow(origin[i - 1] / 1, 2));
-    if (v === "T") scores.push(Math.pow(origin[i - 1] / 1, 3));
-    if (v === "*") {
-      const hasBefore = len >= 2;
-      if (hasBefore) scores[len - 2] = scores[len - 2] * 2;
-      scores[len - 1] = scores[len - 1] * 2;
-    }
-    if (v === "#") scores[len - 1] = scores[len - 1] - 2 * scores[len - 1];
-  });
-  return scores.reduce((accum, v) => accum + v, 0);
-}
-```
-
-- 매개변수 dartResult에서 넘어오는 문자열에서 10점을 분리하는 과정(1-9는 한 자리, 10은 두 자리)을 거치지 않아 수정이 필요했었다.
-- 처음 만들었을 때 세 개의 배열 SDT, options, scores로 각각 분리한 뒤 처리하는 로직으로 만들었는데 비효율적인 것 같아 최대한 배열생성을 자제하며 수정했다.
 
 [Top](#알고리즘)
 
