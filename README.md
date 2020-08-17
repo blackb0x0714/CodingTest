@@ -1,5 +1,15 @@
 # 📝 Table of Contents
 
+# 자료구조
+
+- [배열(Array)](#배열)
+- [큐(Queue)](#큐)
+- [스택(Stack)](#스택)
+- [연결리스트(LinkedList)](#연결리스트)
+- [해쉬(Hash)](#해쉬)
+- [트리(Tree)](#트리)
+- [힙(Heap)](#힙)
+
 # 알고리즘
 
 - [알고리즘이란](#알고리즘이란)
@@ -18,19 +28,6 @@
 - [그래프 탐색](#그래프-탐색)
 - [네트워크 플로우(network flow)](#네트워크-플로우)
 
-# 자료구조
-
-- [배열(Array)](#배열)
-- [연결리스트(LinkedList)](#연결리스트)
-- [스택(Stack)](#스택)
-- [큐(Queue)](#큐)
-- [트리(Tree)](#트리)
-- [힙(Heap)](#힙)
-- [트리(Tree)](#트리)
-- [AVL 트리(Tree)](#AVL-트리)
-- [그래프(Graph)](#그래프)
-- [해쉬(Hash)](#해쉬)
-
 # JS 100제
 
 - [문제 1~50](https://www.notion.so/JS-100-1-0465a498481c471488646526a181087f)
@@ -42,10 +39,563 @@
 - [자료1](https://realmojo.tistory.com/300)
 - [자료2](https://sunnykim91.tistory.com/121)
 - [자료3](https://ojayyezzir.tistory.com/6?category=374523)
+- JS, React, CS, 프로젝트
 
 # 프로그래머스 문제풀이
 
 - [Level-1](https://kowoohyuk.tistory.com/41)
+
+---
+
+## 배열
+
+- 출처 : [Cookie님 Velog](https://velog.io/@ryu/JavaScript-%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0-Array%EB%B0%B0%EC%97%B4)
+
+---
+
+### 선언하기
+
+- 배열은 Array 생성자로 생성된 Array 타입의 객체입니다.
+
+```javascript
+// 선언방법 1.
+const array1 = new Array();
+array1[0] = 1;
+
+// 선언방법 2.
+const array2 = new Array(1, 2, 3);
+
+// 선언방법 3.
+const array3 = [1, 2, 3];
+```
+
+---
+
+### 속성 및 내장 메소드 사용하기
+
+- indexOf, push, pop, length, shift, concat, join, reverse, sort, slice, splice
+
+```javascript
+// indexOf
+const arrayIndexOf = [1, 2, 3];
+console.log(arrayIndexOf.indexOf(2)); // 2의 인덱스는? 1
+console.log(arrayIndexOf.indexOf(5)); // 5의 인덱스는? -1 (없음)
+
+// push
+const arrayPush = [1, 2, 3];
+arrayPush.push(4); // array = [1, 2, 3, 4]
+
+// pop
+const arrayPop = [1, 2, 3];
+arrayPop.pop(); // array = [1, 2]
+
+// length
+const arrayLegnth = [1, 2, 3];
+console.log(arrayLength.length); // 3
+
+// shift: 배열 첫번째 요소를 제거
+const arrayTest = ['a', 'b', 'c'];
+arrayTest.shift(); // 'a'
+console.log(arrayTest); // ['b', 'c']
+
+ concat : 두개의 배열을 합쳐서 새 배열로 반환
+ const arrayConcat = [1, 2, 3];
+ console.log(arrayConcat.concat(4)); // [1, 2, 3, 4] 4추가
+ console.log(arrayConcat.contact(['a', 'b', 'c'])); [1, 2, 3, 'a', 'b', 'c']
+
+ // join : 배열 요소 사이에 문자를 삽입하여 문자열 반환
+ const arrayJoin = [1, 2, 3, 4, 5];
+ console.log(arrayJoin.join('/')); // 1/2/3/4/5
+
+ // reverse : 배열을 뒤집음
+ const arrayReverse = [1, 2, 3]
+ arrayReverse.reverse();
+ console.log(arrayReverse); [3, 2, 1]
+
+ // sort : 배열을 정렬
+ const arraySort = [5, 3, 1];
+ arraySort.sort();
+ console.log(arraySort); // [1, 3, 5]
+
+ // slice : 배열의 일부를 새 배열로 반환
+const arraySlice = [1, 2, 3, 4, 5];
+arraySlice.slice(1, 3); // [2, 3] slice(start[, end])
+
+// splice : 기존 배열의 요소를 제거하고, 제거한 요소를 새 배열로 반환
+const arraySplice = [1, 2, 3, 4];
+const test = arraySplice.splice(1, 2); // [2, 3]
+console.log(arraySplice); // [1, 4]
+```
+
+### 기존 배열을 변경하지 않는 메소드
+
+- concat()
+- join()
+- slice()
+
+---
+
+### 배열 순회하기
+
+- forEach()
+- for in
+- for of
+- map
+
+#### forEach()
+
+- 배열 요소를 반복하며 특정 작업을 수행할 수 있으며, Array 타입에서만 사용가능한 메서드입니다.
+- forEach()의 안자로 callback 함수를 등록할 수 있습니다.
+- callback 함수 내에서는 index와 배열 요소값에 접근할 수 있습니다.
+
+```javascript
+const array = [1, 2, 3];
+array.forEach((item, index) => console.log(`${item}...${index}`)); // 1...0 , 2...1 , 3...2
+```
+
+#### for in
+
+- 객체에 사용할 수 있으며, 객체의 key와 value 값을 추출해내는데 사용합니다.
+- 객체의 key 갯수만큼 반복합니다.
+
+```javascript
+const array = [1, 2, 3];
+for (let key in array) {
+  console.log(`${array[key]}...${key}`); // 1...0 , 2...1 , 3... 2
+}
+```
+
+#### for of
+
+- ES6 에 추가된, 컬렉션 전용 반복구문 입니다.
+- for of 를 사용하려면 컬렉션 객체가 [Symbol.iterator] 속성을 가지고 있어야만 합니다.
+
+```javascript
+const array = [1, 2, 3];
+for (let item of array) {
+  console.log(`${item}`);
+} // 1, 2, 3
+```
+
+#### map
+
+- 리스트의 요소를 순회하며 현재 index의 요소의 데이터를 가공하여 새로운 리스트로 반환합니다.
+
+```javascript
+const array = [1, 2, 3];
+const newArray = array.map((item) => item + 1); // [2, 3, 4]
+```
+
+[Top](#자료구조)
+
+---
+
+
+## 큐
+
+- 출처 : [Zero Cho님 사이트](https://www.zerocho.com/category/Algorithm/post/580b9b94108f510015524097)
+- count, head, rear
+- data, next
+- enqueue, dequeue, front
+
+```javascript
+var Queue = (function () {
+  function Queue() {
+    this.count = 0;
+    this.head = null;
+    this.rear = null;
+  }
+  function Node(data) {
+    this.data = data;
+    this.next = null;
+  }
+  Queue.prototype.enqueue = function (data) {
+    var node = new Node(data);
+    if (!this.head) {
+      this.head = node;
+    } else {
+      this.rear.next = node;
+    }
+    this.rear = node;
+    return ++this.count;
+  };
+  Queue.prototype.dequeue = function () {
+    if (!this.head) {
+      // stack underflow 방지
+      return false;
+    }
+    var data = this.head.data;
+    this.head = this.head.next;
+    // this.head 메모리 클린
+    --this.count;
+    return data;
+  };
+  Queue.prototype.front = function () {
+    return this.head && this.head.data;
+  };
+  return Queue;
+})();
+var queue = new Queue();
+queue.enqueue(1); // 1
+queue.enqueue(3); // 2
+queue.enqueue(5); // 3
+queue.dequeue(); // 1
+queue.front(); // 3
+```
+
+[Top](#자료구조)
+
+---
+
+## 스택
+
+- 출처 : [Zero Cho님 사이트](https://www.zerocho.com/category/Algorithm/post/5800b79e1dfb250015c38db6)
+- top, count
+- data, next
+- push, pop, stackTop
+
+```javascript
+var Stack = (function () {
+  function Stack() {
+    this.top = null;
+    this.count = 0;
+  }
+  function Node(data) {
+    this.data = data;
+    this.next = null;
+  }
+  Stack.prototype.push = function (data) {
+    var node = new Node(data);
+    node.next = this.top;
+    this.top = node;
+    return ++this.count;
+  };
+  Stack.prototype.pop = function () {
+    if (!this.top) {
+      // stack underflow 방지
+      return false;
+    }
+    var data = this.top.data;
+    this.top = this.top.next;
+    // 예전 this.top의 메모리 정리
+    this.count--;
+    return data;
+  };
+  Stack.prototype.stackTop = function () {
+    return this.top.data;
+  };
+  return Stack;
+})();
+var stack = new Stack();
+stack.push(1); // 1
+stack.push(3); // 2
+stack.push(5); // 3
+stack.pop(); // 5
+stack.stackTop(); // 3
+```
+
+[Top](#알고리즘)
+
+---
+
+## 연결리스트
+
+- 출처 : [Zero Cho님 사이트](https://www.zerocho.com/category/Algorithm/post/58008a628475ed00152d6c4d)
+- length : 노드의 개수를 표현하는 부분, head : 첫 노드의 주소를 가리키는 부분
+- data, next
+- add, search, remove
+
+```javascript
+var LinkedList = (function () {
+  function LinkedList() {
+    this.length = 0;
+    this.head = null;
+  }
+  function Node(data) {
+    this.data = data;
+    this.next = null;
+  }
+  LinkedList.prototype.add = function (value) {
+    var node = new Node(value);
+    var current = this.head;
+    if (!current) {
+      // 현재 아무 노드도 없으면
+      this.head = node; // head에 새 노드를 추가합니다.
+      this.length++;
+      return node;
+    } else {
+      // 이미 노드가 있으면
+      while (current.next) {
+        // 마지막 노드를 찾고.
+        current = current.next;
+      }
+      current.next = node; // 마지막 위치에 노드를 추가합니다.
+      this.length++;
+      return node;
+    }
+  };
+  LinkedList.prototype.search = function (position) {
+    var current = this.head;
+    var count = 0;
+    while (count < position) {
+      // position 위치만큼 이동합니다.
+      current = current.next;
+      count++;
+    }
+    return current.data;
+  };
+  LinkedList.prototype.remove = function (position) {
+    var current = this.head;
+    var before;
+    var remove;
+    var count = 0;
+    if (position == 0) {
+      // 맨 처음 노드를 삭제하면
+      remove = this.head;
+      this.head = this.head.next; // head를 두 번째 노드로 교체
+      this.length--;
+      return remove;
+    } else {
+      // 그 외의 다른 노드를 삭제하면
+      while (count < position) {
+        before = current;
+        count++;
+        current = current.next;
+      }
+      remove = current;
+      before.next = remove.next;
+      // remove 메모리 정리
+      this.length--;
+      return remove;
+    }
+  };
+  return LinkedList;
+})();
+
+var list = new LinkedList();
+list.add(1);
+list.add(2);
+list.add(3);
+list.length; // 3
+list.search(0); // 1
+list.search(2); // 3
+list.remove(1);
+list.length; // 2
+```
+
+[Top](#자료구조)
+
+---
+
+## 해쉬
+
+- 출처 : [Evan Moon님 사이트](https://evan-moon.github.io/2019/06/25/hashtable-with-js/)
+
+```javascript
+```
+
+[Top](#자료구조)
+
+---
+
+## 트리
+
+- 출처 : [Zero Cho님 사이트](https://www.zerocho.com/category/Algorithm/post/580ed6eb77023c0015ee9686)
+- Tree(count, root)
+- Node(data, left, right)
+- add, get, remove
+
+```javascript
+var Tree = (function () {
+  function Tree() {
+    this.count = 0;
+    this.root;
+  }
+  function Node(data) {
+    this.data = data;
+    this.left;
+    this.right;
+  }
+  function _insert(root, node) {
+    if (!root) return node;
+    if (node.data < root.data) {
+      root.left = _insert(root.left, node);
+      return root;
+    } else {
+      root.right = _insert(root.right, node);
+      return root;
+    }
+    return root;
+  }
+  Tree.prototype.add = function (data) {
+    var node = new Node(data);
+    if (this.count == 0) {
+      this.root = node;
+    } else {
+      _insert(this.root, node);
+    }
+    return ++this.count;
+  };
+  function _get(data, node) {
+    if (node) {
+      if (data < node.data) {
+        return _get(data, node.left);
+      } else if (data > node.data) {
+        return _get(data, node.right);
+      } else {
+        return node;
+      }
+    } else {
+      return null;
+    }
+  }
+  Tree.prototype.get = function (data) {
+    if (this.root) {
+      return _get(data, this.root);
+    } else {
+      return null;
+    }
+  };
+  function _remove(root, data) {
+    var newRoot, exchange, temp;
+    if (!root) return false;
+    if (data < root.data) {
+      root.left = _remove(root.left, data);
+    } else if (data > root.data) {
+      root.right = _remove(root.right, data);
+    } else {
+      if (!root.left) {
+        newRoot = root.right;
+        // root 메모리 정리
+        return newRoot;
+      } else if (!root.right) {
+        newRoot = root.left;
+        // root 메모리 정리
+        return newRoot;
+      } else {
+        exchange = root.left;
+        while (exchange.right) exchange = exchange.right;
+        temp = root.data;
+        root.data = exchange.data;
+        exchange.data = temp;
+        root.left = _remove(root.left, exchange.data);
+      }
+    }
+    return root;
+  }
+  Tree.prototype.remove = function (key) {
+    var node = _remove(this.root, key);
+    if (node) {
+      this.root = node;
+      this.count--;
+      if (this.count == 0) this.root = null;
+    }
+    return true;
+  };
+  return Tree;
+})();
+
+var tree = new Tree();
+tree.add(5); // 1
+tree.add(3); // 2
+tree.add(4); // 3
+tree.add(2); // 4
+tree.add(7); // 5
+tree.add(6); // 6
+tree.root.left.data; // 3
+tree.root.left.left.data; // 2;
+tree.root.left.right.data; // 4
+tree;
+tree.remove(3);
+tree.root.left.data;
+```
+
+[Top](#자료구조)
+
+---
+
+## 힙
+
+- O(NlgN)
+
+- 출처 : [Zero Cho님 사이트](hhttps://www.zerocho.com/category/Algorithm/post/582de223d4416a001860e763)
+
+```javascript
+var Heap = (function () {
+  function Heap() {
+    this.arr = [];
+  }
+  function reheapUp(self, idx) {
+    if (idx) {
+      var parent = parseInt((idx - 1) / 2);
+      if (self.arr[idx] > self.arr[parent]) {
+        var temp = self.arr[idx];
+        self.arr[idx] = self.arr[parent];
+        self.arr[parent] = temp;
+        reheapUp(self, parent);
+      }
+    }
+  }
+  function reheapDown(self, idx) {
+    var left = 0;
+    var right = 0;
+    var large;
+    if (idx * 2 + 1 < self.arr.length) {
+      left = self.arr[idx * 2 + 1];
+      if (idx * 2 + 2 < self.arr.length - 1) {
+        right = self.arr[idx * 2 + 2];
+      }
+      if (left > right) {
+        large = idx * 2 + 1;
+      } else {
+        large = idx * 2 + 2;
+      }
+      if (self.arr[idx] < self.arr[large]) {
+        var temp = self.arr[idx];
+        self.arr[idx] = self.arr[large];
+        self.arr[large] = temp;
+        reheapDown(self, large);
+      }
+    }
+  }
+  Heap.prototype.insert = function (number) {
+    var last = this.arr.length;
+    this.arr[last] = number;
+    reheapUp(this, last);
+    return true;
+  };
+  Heap.prototype.delete = function () {
+    if (this.arr.length === 0) {
+      return false;
+    }
+    var del = this.arr[0];
+    this.arr[0] = this.arr.pop();
+    reheapDown(this, 0);
+    return del;
+  };
+  Heap.prototype.sort = function () {
+    var sort = [];
+    var count = this.arr.length;
+    for (var i = 0; i < count; i++) {
+      sort.push(this.delete());
+    }
+    return sort;
+  };
+  return Heap;
+})();
+
+var heap = new Heap();
+heap.insert(5);
+heap.insert(3);
+heap.insert(7);
+heap.insert(4);
+heap.insert(2);
+heap.insert(6);
+heap.insert(1);
+heap.sort(); // [7,6,5,4,3,2,1]
+```
+
+[Top](#자료구조)
 
 ---
 
@@ -842,1065 +1392,6 @@ graph.insertArc(2, 'y', 'z', 3);
 graph.insertArc(1, 'z', 'x', 3);
 graph.insertArc(1, 'z', 't', 2);
 graph.fordFulkerson('s', 't'); // 4
-```
-
-[Top](#알고리즘)
-
----
-
-## 배열
-
-- 출처 : [Cookie님 Velog](https://velog.io/@ryu/JavaScript-%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0-Array%EB%B0%B0%EC%97%B4)
-
----
-
-### 선언하기
-
-- 배열은 Array 생성자로 생성된 Array 타입의 객체입니다.
-
-```javascript
-// 선언방법 1.
-const array1 = new Array();
-array1[0] = 1;
-
-// 선언방법 2.
-const array2 = new Array(1, 2, 3);
-
-// 선언방법 3.
-const array3 = [1, 2, 3];
-```
-
----
-
-### 속성 및 내장 메소드 사용하기
-
-- indexOf, push, pop, length, shift, concat, join, reverse, sort, slice, splice
-
-```javascript
-// indexOf
-const arrayIndexOf = [1, 2, 3];
-console.log(arrayIndexOf.indexOf(2)); // 2의 인덱스는? 1
-console.log(arrayIndexOf.indexOf(5)); // 5의 인덱스는? -1 (없음)
-
-// push
-const arrayPush = [1, 2, 3];
-arrayPush.push(4); // array = [1, 2, 3, 4]
-
-// pop
-const arrayPop = [1, 2, 3];
-arrayPop.pop(); // array = [1, 2]
-
-// length
-const arrayLegnth = [1, 2, 3];
-console.log(arrayLength.length); // 3
-
-// shift: 배열 첫번째 요소를 제거
-const arrayTest = ['a', 'b', 'c'];
-arrayTest.shift(); // 'a'
-console.log(arrayTest); // ['b', 'c']
-
- concat : 두개의 배열을 합쳐서 새 배열로 반환
- const arrayConcat = [1, 2, 3];
- console.log(arrayConcat.concat(4)); // [1, 2, 3, 4] 4추가
- console.log(arrayConcat.contact(['a', 'b', 'c'])); [1, 2, 3, 'a', 'b', 'c']
-
- // join : 배열 요소 사이에 문자를 삽입하여 문자열 반환
- const arrayJoin = [1, 2, 3, 4, 5];
- console.log(arrayJoin.join('/')); // 1/2/3/4/5
-
- // reverse : 배열을 뒤집음
- const arrayReverse = [1, 2, 3]
- arrayReverse.reverse();
- console.log(arrayReverse); [3, 2, 1]
-
- // sort : 배열을 정렬
- const arraySort = [5, 3, 1];
- arraySort.sort();
- console.log(arraySort); // [1, 3, 5]
-
- // slice : 배열의 일부를 새 배열로 반환
-const arraySlice = [1, 2, 3, 4, 5];
-arraySlice.slice(1, 3); // [2, 3] slice(start[, end])
-
-// splice : 기존 배열의 요소를 제거하고, 제거한 요소를 새 배열로 반환
-const arraySplice = [1, 2, 3, 4];
-const test = arraySplice.splice(1, 2); // [2, 3]
-console.log(arraySplice); // [1, 4]
-```
-
-### 기존 배열을 변경하지 않는 메소드
-
-- concat()
-- join()
-- slice()
-
----
-
-### 배열 순회하기
-
-- forEach()
-- for in
-- for of
-- map
-
-#### forEach()
-
-- 배열 요소를 반복하며 특정 작업을 수행할 수 있으며, Array 타입에서만 사용가능한 메서드입니다.
-- forEach()의 안자로 callback 함수를 등록할 수 있습니다.
-- callback 함수 내에서는 index와 배열 요소값에 접근할 수 있습니다.
-
-```javascript
-const array = [1, 2, 3];
-array.forEach((item, index) => console.log(`${item}...${index}`)); // 1...0 , 2...1 , 3...2
-```
-
-#### for in
-
-- 객체에 사용할 수 있으며, 객체의 key와 value 값을 추출해내는데 사용합니다.
-- 객체의 key 갯수만큼 반복합니다.
-
-```javascript
-const array = [1, 2, 3];
-for (let key in array) {
-  console.log(`${array[key]}...${key}`); // 1...0 , 2...1 , 3... 2
-}
-```
-
-#### for of
-
-- ES6 에 추가된, 컬렉션 전용 반복구문 입니다.
-- for of 를 사용하려면 컬렉션 객체가 [Symbol.iterator] 속성을 가지고 있어야만 합니다.
-
-```javascript
-const array = [1, 2, 3];
-for (let item of array) {
-  console.log(`${item}`);
-} // 1, 2, 3
-```
-
-#### map
-
-- 리스트의 요소를 순회하며 현재 index의 요소의 데이터를 가공하여 새로운 리스트로 반환합니다.
-
-```javascript
-const array = [1, 2, 3];
-const newArray = array.map((item) => item + 1); // [2, 3, 4]
-```
-
-[Top](#알고리즘)
-
----
-
-## 연결리스트
-
-- 출처 : [Zero Cho님 사이트](https://www.zerocho.com/category/Algorithm/post/58008a628475ed00152d6c4d)
-- length : 노드의 개수를 표현하는 부분, head : 첫 노드의 주소를 가리키는 부분
-- data, next
-- add, search, remove
-
-```javascript
-var LinkedList = (function () {
-  function LinkedList() {
-    this.length = 0;
-    this.head = null;
-  }
-  function Node(data) {
-    this.data = data;
-    this.next = null;
-  }
-  LinkedList.prototype.add = function (value) {
-    var node = new Node(value);
-    var current = this.head;
-    if (!current) {
-      // 현재 아무 노드도 없으면
-      this.head = node; // head에 새 노드를 추가합니다.
-      this.length++;
-      return node;
-    } else {
-      // 이미 노드가 있으면
-      while (current.next) {
-        // 마지막 노드를 찾고.
-        current = current.next;
-      }
-      current.next = node; // 마지막 위치에 노드를 추가합니다.
-      this.length++;
-      return node;
-    }
-  };
-  LinkedList.prototype.search = function (position) {
-    var current = this.head;
-    var count = 0;
-    while (count < position) {
-      // position 위치만큼 이동합니다.
-      current = current.next;
-      count++;
-    }
-    return current.data;
-  };
-  LinkedList.prototype.remove = function (position) {
-    var current = this.head;
-    var before;
-    var remove;
-    var count = 0;
-    if (position == 0) {
-      // 맨 처음 노드를 삭제하면
-      remove = this.head;
-      this.head = this.head.next; // head를 두 번째 노드로 교체
-      this.length--;
-      return remove;
-    } else {
-      // 그 외의 다른 노드를 삭제하면
-      while (count < position) {
-        before = current;
-        count++;
-        current = current.next;
-      }
-      remove = current;
-      before.next = remove.next;
-      // remove 메모리 정리
-      this.length--;
-      return remove;
-    }
-  };
-  return LinkedList;
-})();
-
-var list = new LinkedList();
-list.add(1);
-list.add(2);
-list.add(3);
-list.length; // 3
-list.search(0); // 1
-list.search(2); // 3
-list.remove(1);
-list.length; // 2
-```
-
-[Top](#알고리즘)
-
----
-
-## 스택
-
-- 출처 : [Zero Cho님 사이트](https://www.zerocho.com/category/Algorithm/post/5800b79e1dfb250015c38db6)
-- top, count
-- data, next
-- push, pop, stackTop
-
-```javascript
-var Stack = (function () {
-  function Stack() {
-    this.top = null;
-    this.count = 0;
-  }
-  function Node(data) {
-    this.data = data;
-    this.next = null;
-  }
-  Stack.prototype.push = function (data) {
-    var node = new Node(data);
-    node.next = this.top;
-    this.top = node;
-    return ++this.count;
-  };
-  Stack.prototype.pop = function () {
-    if (!this.top) {
-      // stack underflow 방지
-      return false;
-    }
-    var data = this.top.data;
-    this.top = this.top.next;
-    // 예전 this.top의 메모리 정리
-    this.count--;
-    return data;
-  };
-  Stack.prototype.stackTop = function () {
-    return this.top.data;
-  };
-  return Stack;
-})();
-var stack = new Stack();
-stack.push(1); // 1
-stack.push(3); // 2
-stack.push(5); // 3
-stack.pop(); // 5
-stack.stackTop(); // 3
-```
-
-[Top](#알고리즘)
-
----
-
-## 큐
-
-- 출처 : [Zero Cho님 사이트](https://www.zerocho.com/category/Algorithm/post/580b9b94108f510015524097)
-- count, head, rear
-- data, next
-- enqueue, dequeue, front
-
-```javascript
-var Queue = (function () {
-  function Queue() {
-    this.count = 0;
-    this.head = null;
-    this.rear = null;
-  }
-  function Node(data) {
-    this.data = data;
-    this.next = null;
-  }
-  Queue.prototype.enqueue = function (data) {
-    var node = new Node(data);
-    if (!this.head) {
-      this.head = node;
-    } else {
-      this.rear.next = node;
-    }
-    this.rear = node;
-    return ++this.count;
-  };
-  Queue.prototype.dequeue = function () {
-    if (!this.head) {
-      // stack underflow 방지
-      return false;
-    }
-    var data = this.head.data;
-    this.head = this.head.next;
-    // this.head 메모리 클린
-    --this.count;
-    return data;
-  };
-  Queue.prototype.front = function () {
-    return this.head && this.head.data;
-  };
-  return Queue;
-})();
-var queue = new Queue();
-queue.enqueue(1); // 1
-queue.enqueue(3); // 2
-queue.enqueue(5); // 3
-queue.dequeue(); // 1
-queue.front(); // 3
-```
-
-[Top](#알고리즘)
-
----
-
-## 트리
-
-- 출처 : [Zero Cho님 사이트](https://www.zerocho.com/category/Algorithm/post/580ed6eb77023c0015ee9686)
-- Tree(count, root)
-- Node(data, left, right)
-- add, get, remove
-
-```javascript
-var Tree = (function () {
-  function Tree() {
-    this.count = 0;
-    this.root;
-  }
-  function Node(data) {
-    this.data = data;
-    this.left;
-    this.right;
-  }
-  function _insert(root, node) {
-    if (!root) return node;
-    if (node.data < root.data) {
-      root.left = _insert(root.left, node);
-      return root;
-    } else {
-      root.right = _insert(root.right, node);
-      return root;
-    }
-    return root;
-  }
-  Tree.prototype.add = function (data) {
-    var node = new Node(data);
-    if (this.count == 0) {
-      this.root = node;
-    } else {
-      _insert(this.root, node);
-    }
-    return ++this.count;
-  };
-  function _get(data, node) {
-    if (node) {
-      if (data < node.data) {
-        return _get(data, node.left);
-      } else if (data > node.data) {
-        return _get(data, node.right);
-      } else {
-        return node;
-      }
-    } else {
-      return null;
-    }
-  }
-  Tree.prototype.get = function (data) {
-    if (this.root) {
-      return _get(data, this.root);
-    } else {
-      return null;
-    }
-  };
-  function _remove(root, data) {
-    var newRoot, exchange, temp;
-    if (!root) return false;
-    if (data < root.data) {
-      root.left = _remove(root.left, data);
-    } else if (data > root.data) {
-      root.right = _remove(root.right, data);
-    } else {
-      if (!root.left) {
-        newRoot = root.right;
-        // root 메모리 정리
-        return newRoot;
-      } else if (!root.right) {
-        newRoot = root.left;
-        // root 메모리 정리
-        return newRoot;
-      } else {
-        exchange = root.left;
-        while (exchange.right) exchange = exchange.right;
-        temp = root.data;
-        root.data = exchange.data;
-        exchange.data = temp;
-        root.left = _remove(root.left, exchange.data);
-      }
-    }
-    return root;
-  }
-  Tree.prototype.remove = function (key) {
-    var node = _remove(this.root, key);
-    if (node) {
-      this.root = node;
-      this.count--;
-      if (this.count == 0) this.root = null;
-    }
-    return true;
-  };
-  return Tree;
-})();
-
-var tree = new Tree();
-tree.add(5); // 1
-tree.add(3); // 2
-tree.add(4); // 3
-tree.add(2); // 4
-tree.add(7); // 5
-tree.add(6); // 6
-tree.root.left.data; // 3
-tree.root.left.left.data; // 2;
-tree.root.left.right.data; // 4
-tree;
-tree.remove(3);
-tree.root.left.data;
-```
-
-[Top](#알고리즘)
-
----
-
-## 힙
-
-- O(NlgN)
-
-- 출처 : [Zero Cho님 사이트](hhttps://www.zerocho.com/category/Algorithm/post/582de223d4416a001860e763)
-
-```javascript
-var Heap = (function () {
-  function Heap() {
-    this.arr = [];
-  }
-  function reheapUp(self, idx) {
-    if (idx) {
-      var parent = parseInt((idx - 1) / 2);
-      if (self.arr[idx] > self.arr[parent]) {
-        var temp = self.arr[idx];
-        self.arr[idx] = self.arr[parent];
-        self.arr[parent] = temp;
-        reheapUp(self, parent);
-      }
-    }
-  }
-  function reheapDown(self, idx) {
-    var left = 0;
-    var right = 0;
-    var large;
-    if (idx * 2 + 1 < self.arr.length) {
-      left = self.arr[idx * 2 + 1];
-      if (idx * 2 + 2 < self.arr.length - 1) {
-        right = self.arr[idx * 2 + 2];
-      }
-      if (left > right) {
-        large = idx * 2 + 1;
-      } else {
-        large = idx * 2 + 2;
-      }
-      if (self.arr[idx] < self.arr[large]) {
-        var temp = self.arr[idx];
-        self.arr[idx] = self.arr[large];
-        self.arr[large] = temp;
-        reheapDown(self, large);
-      }
-    }
-  }
-  Heap.prototype.insert = function (number) {
-    var last = this.arr.length;
-    this.arr[last] = number;
-    reheapUp(this, last);
-    return true;
-  };
-  Heap.prototype.delete = function () {
-    if (this.arr.length === 0) {
-      return false;
-    }
-    var del = this.arr[0];
-    this.arr[0] = this.arr.pop();
-    reheapDown(this, 0);
-    return del;
-  };
-  Heap.prototype.sort = function () {
-    var sort = [];
-    var count = this.arr.length;
-    for (var i = 0; i < count; i++) {
-      sort.push(this.delete());
-    }
-    return sort;
-  };
-  return Heap;
-})();
-
-var heap = new Heap();
-heap.insert(5);
-heap.insert(3);
-heap.insert(7);
-heap.insert(4);
-heap.insert(2);
-heap.insert(6);
-heap.insert(1);
-heap.sort(); // [7,6,5,4,3,2,1]
-```
-
-[Top](#알고리즘)
-
----
-
-## AVL 트리
-
-- 정의부
-- 삽입부
-- 삭제부
-- 실행부분
-
-- 출처 : [Zero Cho님 사이트](https://www.zerocho.com/category/Algorithm/post/583cacb648a7340018ac73f1)
-
-```javascript
-// 1. 정의부
-var AVL = (function () {
-  function AVL() {
-    this.count = 0;
-    this.root;
-    this.taller;
-    this.shorter;
-    this.success;
-  }
-  function Node(data) {
-    this.data = data;
-    this.left;
-    this.right;
-    this.bal = 0; // 왼쪽과 오른쪽의 차이를 저장
-  }
-  // 삽입부 코드를 여기에
-  // 삭제부 코드를 여기에
-  AVL.prototype.insert = function (data) {
-    this.taller = false;
-    var node = new Node(data);
-    this.root = this._insert(this.root, node);
-    this.count++;
-  };
-
-  AVL.prototype.delete = function (key) {
-    this.shorter = false;
-    this.succuess = false;
-    var newRoot = this._delete(this.root, key);
-    if (this.success) {
-      this.root = newRoot;
-      this.count--;
-      return true;
-    }
-    return false;
-  };
-
-  AVL.prototype.search = function (key) {
-    if (this.root) {
-      return this._search(key, this.root);
-    }
-    return false;
-  };
-
-  AVL.prototype._search = function (key, root) {
-    if (root) {
-      if (key < root.data) {
-        return this._search(key, root.left);
-      } else if (key > root.data) {
-        return this._search(key, root.right);
-      } else {
-        return root;
-      }
-    }
-    return;
-  };
-
-  AVL.prototype._rotateLeft = function (root) {
-    var temp = root.right; // temp를 중간 노드로 생각하면 이해하기 쉽다.
-    root.right = temp.left;
-    temp.left = root;
-    return temp;
-  };
-
-  AVL.prototype._rotateRight = function (root) {
-    var temp = root.left; // temp를 중간 노드로 생각하면 이해하기 쉽다.
-    root.left = temp.right;
-    temp.right = root;
-    return temp;
-  };
-
-  return AVL;
-})();
-
-// 2. 삽입부
-AVL.prototype._insert = function (root, node) {
-  // 내부적 insert 메소드
-  if (!root) {
-    // 트리의 말단 부분에 도달하면 바로 넣는다.
-    root = node;
-    this.taller = true;
-    console.log("no root", root);
-    return root;
-  }
-  if (node.data < root.data) {
-    // 새 값이 루트 값보다 작으면
-    root.left = this._insert(root.left, node);
-    console.log("go left", this.taller, root.bal);
-    if (this.taller) {
-      // 삽입으로 인해서 한 쪽이 더 길어졌으면
-      switch (root.bal) {
-        case 1: // 왼쪽이 더 긴 상태에서 또 왼쪽에 넣어줬으므로 LL 또는 RL
-          root = this._insLeftBal(root);
-          break;
-        case 0: // 균형이었던 상태에서 왼쪽에 넣어줬으므로 왼쪽이 길어짐
-          root.bal = 1;
-          break;
-        case -1: // 오른쪽이 길었던 상태에서 왼쪽에 넣어줬기 때문에 균형
-          root.bal = 0;
-          this.taller = false;
-          break;
-      }
-    }
-    return root;
-  } else {
-    // 새 값이 루트 값보다 크면
-    root.right = this._insert(root.right, node);
-    console.log("go right", this.taller, root.bal);
-    if (this.taller) {
-      // 삽입으로 인해서 한 쪽이 더 길어졌으면
-      switch (root.bal) {
-        case 1: // 왼쪽이 긴 상태에서 오른쪽에 넣어줬기 때문에 균형
-          root.bal = 0;
-          this.taller = false;
-          break;
-        case 0: // 균형이었던 상태에서 오른쪽에 넣어줬기 때문에 오른쪽이 길어짐
-          root.bal = -1;
-          break;
-        case -1: // 오른쪽이 긴 상태에서 또 오른쪽에 넣어줬으므로 RR 또는 LR
-          root = this._insRightBal(root);
-          break;
-      }
-    }
-    return root;
-  }
-};
-
-AVL.prototype._insLeftBal = function (root) {
-  var left = root.left;
-  console.log("insLeftBal", left.bal);
-  switch (left.bal) {
-    case 1: // LL의 경우입니다.
-      root.bal = 0;
-      left.bal = 0;
-      root = this._rotateRight(root); // 우회전 한 번
-      this.taller = false;
-      break;
-    case 0: // 균형인 경우는 없습니다.
-      throw new Error("불가능한 경우");
-    case -1: // RL의 경우입니다.
-      var right = left.right;
-      switch (right.bal) {
-        case 1:
-          root.bal = -1;
-          left.bal = 0;
-          break;
-        case 0:
-          root.bal = 0;
-          left.bal = 1;
-          break;
-        case -1:
-          root.bal = 0;
-          left.bal = 1;
-          break;
-      }
-      right.bal = 0;
-      root.left = this._rotateLeft(left); // 좌회전 후
-      root = this._rotateRight(root); // 우회전
-      this.taller = false;
-  }
-};
-
-AVL.prototype._insRightBal = function (root) {
-  var right = root.right;
-  console.log("insRightBal", right.bal);
-  switch (right.bal) {
-    case -1: // RR의 경우입니다.
-      root.bal = 0;
-      right.bal = 0;
-      root = this._rotateLeft(root); // 좌회전 한 번
-      this.taller = false;
-      break;
-    case 0: // 균형일 수는 없습니다.
-      throw new Error("불가능한 경우");
-    case 1:
-      var left = right.left;
-      switch (
-        left.bal // LR의 경우입니다.
-      ) {
-        case 1:
-          root.bal = -1;
-          right.bal = 0;
-          break;
-        case 0:
-          root.bal = 0;
-          right.bal = 1;
-          break;
-        case -1:
-          root.bal = 0;
-          right.bal = 1;
-          break;
-      }
-      left.bal = 0;
-      root.right = this._rotateRight(right); // 우회전 후
-      root = this._rotateLeft(root); // 좌회전
-      this.taller = false;
-  }
-  return root;
-};
-
-// 3. 삭제부
-AVL.prototype._delete = function (root, key) {
-  if (!root) {
-    // 지울 게 없습니다.
-    console.log("no root to delete");
-    this.shorter = false;
-    this.success = false;
-    return;
-  }
-  if (key < root.data) {
-    // 지울 값이 루트 값보다 작으면
-    root.left = this._delete(root.left, key);
-    console.log("go left", root.left, this.shorter);
-    if (this.shorter) {
-      // 삭제로 인해 짧아졌으면
-      root = this._delRightBal(root);
-    }
-  } else if (key > root.data) {
-    // 지울 값이 루트 값보다 크면
-    root.right = this._delete(root.right, key);
-    console.log("go right", root.right, this.shorter);
-    if (this.shorter) {
-      // 삭제로 인해 짧아졌으면
-      root = this._delLeftBal(root);
-    }
-  } else {
-    // key와 일치하는 데이터를 찾았을 때
-    console.log("found", key, root);
-    if (!root.right) {
-      // 오른쪽 자식이 없으면 노드가 제거됐을 때 왼쪽 자식이 루트
-      var newRoot = root.left;
-      this.success = true;
-      this.shorter = true;
-      return newRoot;
-    } else if (!root.left) {
-      // 왼쪽 자식이 없으면 노드가 제거됐을 때 오른쪽 자식이 루트
-      var newRoot = root.right;
-      this.success = true;
-      this.shorter = true;
-      return newRoot;
-    } else {
-      // 삭제할 노드를 계속 왼쪽으로 보내서 제거(트리 강좌 참고)
-      var temp = root.left;
-      while (temp.right) temp = temp.right;
-      root.data = temp.data;
-      root.left = this._delete(root.left, temp.data);
-      if (this.shorter) {
-        // 삭제로 짧아졌으면
-        root = this._delRightBal(root);
-      }
-    }
-  }
-  return root;
-};
-
-AVL.prototype._delLeftBal = function (root) {
-  console.log("delLeftBal", root, root.bal, root.left);
-  switch (root.bal) {
-    case 1:
-      root.bal = 0;
-      break;
-    case 0:
-      root.bal = -1;
-      this.shorter = false;
-      break;
-    case -1:
-      var left = root.left;
-      if (left.bal === 1) {
-        // RL의 경우
-        var right = left.right;
-        switch (right.bal) {
-          case 1:
-            left.bal = -1;
-            root.bal = 0;
-            break;
-          case 0:
-            root.bal = 0;
-            left.bal = 0;
-            break;
-          case -1:
-            root.bal = 1;
-            left.bal = 0;
-            break;
-        }
-        right.bal = 0;
-        root.left = this._rotateLeft(left);
-        root = this._rotateRight(root);
-      } else {
-        // LL의 경우
-        switch (left.bal) {
-          case -1:
-            root.bal = 0;
-            left.bal = 0;
-            break;
-          case 0:
-            root.bal = -1;
-            left.bal = 1;
-            this.shorter = false;
-            break;
-        }
-        root = this._rotateRight(root);
-      }
-  }
-  return root;
-};
-
-AVL.prototype._delRightBal = function (root) {
-  console.log("delRightBal", root, root.bal);
-  switch (root.bal) {
-    case 1:
-      root.bal = 0;
-      break;
-    case 0:
-      root.bal = -1;
-      this.shorter = false;
-      break;
-    case -1:
-      right = root.right;
-      if (right.bal === 1) {
-        // LR의 경우입니다.
-        left = right.left;
-        console.log("delRightBal LR", left.bal);
-        switch (left.bal) {
-          case 1:
-            right.bal = -1;
-            root.bal = 0;
-            break;
-          case 0:
-            root.bal = 0;
-            right.bal = 0;
-            break;
-          case -1:
-            root.bal = 1;
-            right.bal = 0;
-            break;
-        }
-        left.bal = 0;
-        root.right = this._rotateRight(right);
-        root = this._rotateLeft(root);
-      } else {
-        // RR의 경우입니다.
-        console.log("delRightBal RR", right.bal);
-        switch (right.bal) {
-          case 0:
-            root.bal = -1;
-            right.bal = -1;
-            this.shorter = false;
-            break;
-          case -1:
-            root.bal = 0;
-            right.bal = 0;
-            break;
-        }
-        root = this._rotateLeft(root);
-      }
-  }
-  return root;
-};
-
-// 4. 실행부분
-var avlTree = new AVL(); // 한 줄씩 치면서 어떻게 트리가 변하나 확인해보세요.
-avlTree.insert(8);
-avlTree.insert(12);
-avlTree.insert(14);
-avlTree.insert(18);
-avlTree.insert(20);
-avlTree.insert(23);
-avlTree.insert(44);
-avlTree.insert(52);
-avlTree.delete(20);
-```
-
-[Top](#알고리즘)
-
----
-
-## 그래프
-
-- 출처 : [Zero Cho님 사이트](https://www.zerocho.com/category/Algorithm/post/584b9033580277001862f16c)
-
-```javascript
-var Graph = (function () {
-  function Vertex(key) {
-    this.next = null;
-    this.arc = null;
-    this.key = key;
-    this.inTree = null;
-  }
-  function Arc(data, dest, capacity) {
-    this.nextArc = null;
-    this.destination = dest;
-    this.data = data;
-    this.capacity = capacity;
-    this.inTree = null;
-  }
-  function Graph() {
-    this.count = 0;
-    this.first = null;
-  }
-  Graph.prototype.insertVertex = function (key) {
-    var vertex = new Vertex(key);
-    var last = this.first;
-    if (last) {
-      while (last.next !== null) {
-        last = last.next;
-      }
-      last.next = vertex;
-    } else {
-      this.first = vertex;
-    }
-    this.count++;
-  };
-  Graph.prototype.deleteVertex = function (key) {
-    var vertex = this.first;
-    var prev = null;
-    while (vertex.key !== key) {
-      prev = vertex;
-      vertex = vertex.next;
-    }
-    if (!vertex) return false;
-    if (!vertex.arc) return false;
-    if (prev) {
-      prev.next = vertex.next;
-    } else {
-      this.first = vertex.next;
-    }
-    this.count--;
-  };
-  Graph.prototype.insertArc = function (data, fromKey, toKey, capacity) {
-    var from = this.first;
-    var to = this.first;
-    while (from && from.key !== fromKey) {
-      from = from.next;
-    }
-    while (to && to.key !== toKey) {
-      to = to.next;
-    }
-    if (!from || !to) return false;
-    var arc = new Arc(data, to, capacity);
-    var fromLast = from.arc;
-    if (fromLast) {
-      while (fromLast.nextArc != null) {
-        fromLast = fromLast.nextArc;
-      }
-      fromLast.nextArc = arc;
-    } else {
-      from.arc = arc;
-    }
-  };
-  Graph.prototype.deleteArc = function (fromKey, toKey) {
-    var from = this.first;
-    while (from !== null) {
-      if (from.key === fromKey) break;
-      from = from.next;
-    }
-    if (!from) return false;
-    var fromArc = from.arc;
-    var preArc;
-    while (fromArc !== null) {
-      if (toKey === fromArc.destination.key) break;
-      preArc = fromArc;
-      fromArc = fromArc.next;
-    }
-    if (!fromArc) return false;
-    if (preArc) {
-      preArc.nextArc = fromArc.nextArc;
-    } else {
-      from.arc = fromArc.nextArc;
-    }
-  };
-  return Graph;
-})();
-
-var graph = new Graph();
-graph.insertVertex("A");
-graph.insertVertex("B");
-graph.insertVertex("C");
-graph.insertVertex("D");
-graph.insertVertex("E");
-graph.insertVertex("F");
-graph.insertArc(1, "A", "B");
-graph.insertArc(1, "B", "C");
-graph.insertArc(1, "B", "E");
-graph.insertArc(1, "C", "E");
-graph.insertArc(1, "C", "D");
-graph.insertArc(1, "E", "D");
-graph.insertArc(1, "E", "F");
-
-/* 무방향 그래프
-function insertTwoWayArc(graph, data, from, to) {
-  graph.insertArc(data, from, to);
-  graph.insertArc(data, to, from);
-} */
-```
-
-[Top](#알고리즘)
-
----
-
-## 해쉬
-
-- 출처 : [Evan Moon님 사이트](https://evan-moon.github.io/2019/06/25/hashtable-with-js/)
-
-```javascript
 ```
 
 [Top](#알고리즘)
