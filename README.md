@@ -186,6 +186,9 @@ const array = [1, 2, 3];
 const newArray = array.map((item) => item + 1); // [2, 3, 4]
 ```
 
+### 백준
+- [배열문제](https://www.acmicpc.net/problem/tag/%EB%B0%B0%EC%97%B4)
+
 [Top](#자료구조)
 
 ---
