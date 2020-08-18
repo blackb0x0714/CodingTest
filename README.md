@@ -6,7 +6,7 @@
 - [큐(Queue)](#큐)
 - [스택(Stack)](#스택)
 - [연결리스트(LinkedList)](#연결리스트)
-- [해쉬(Hash)](#해쉬)
+- [해시(Hash)](#해쉬)
 - [트리(Tree)](#트리)
 - [힙(Heap)](#힙)
 
@@ -37,13 +37,10 @@
 
 # 면접질문
 - [자료1](https://realmojo.tistory.com/300)
-- [자료2](https://sunnykim91.tistory.com/121)
-- [자료3](https://ojayyezzir.tistory.com/6?category=374523)
-- JS, React, CS, 프로젝트
-
-# 프로그래머스 문제풀이
-
-- [Level-1](https://kowoohyuk.tistory.com/41)
+- [자료2](https://blex.me/@yoyounn18/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C-%EC%A7%81%EA%B5%B0-%EC%9B%B9%EA%B0%9C%EB%B0%9C%EC%9E%90-%EB%A9%B4%EC%A0%91%EC%A7%88%EB%AC%B8-%EB%AA%A8%EC%9D%8C-%EB%8B%B5%EB%B3%80-%EB%8B%AC%EC%95%84%EB%B3%B4%EA%B8%B0)
+- [자료3](https://blex.me/@baealex/%EC%B7%A8%EC%A4%80%EC%83%9D%EC%9D%B4-%EC%83%9D%EA%B0%81%ED%95%98%EB%8A%94-%EA%B0%9C%EB%B0%9C%EC%9E%90-%EA%B8%B0%EC%88%A0%EB%A9%B4%EC%A0%91-%EC%A4%80%EB%B9%84)
+- [자료4](https://m.blog.naver.com/z1004man/221878557383)
+- [자료5](https://appear.github.io/2018/10/20/REACT/react-translate-01/)
 
 ---
 
@@ -51,200 +48,20 @@
 
 - 출처 : [Cookie님 Velog](https://velog.io/@ryu/JavaScript-%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0-Array%EB%B0%B0%EC%97%B4)
 
----
-
-### 선언하기
-
-- 배열은 Array 생성자로 생성된 Array 타입의 객체입니다.
-
-```javascript
-// 선언방법 1.
-const array1 = new Array();
-array1[0] = 1;
-
-// 선언방법 2.
-const array2 = new Array(1, 2, 3);
-
-// 선언방법 3.
-const array3 = [1, 2, 3];
-```
-
----
-
-### 속성 및 내장 메소드 사용하기
-
-- indexOf, push, pop, length, shift, concat, join, reverse, sort, slice, splice
-
-```javascript
-// indexOf
-const arrayIndexOf = [1, 2, 3];
-console.log(arrayIndexOf.indexOf(2)); // 2의 인덱스는? 1
-console.log(arrayIndexOf.indexOf(5)); // 5의 인덱스는? -1 (없음)
-
-// push
-const arrayPush = [1, 2, 3];
-arrayPush.push(4); // array = [1, 2, 3, 4]
-
-// pop
-const arrayPop = [1, 2, 3];
-arrayPop.pop(); // array = [1, 2]
-
-// length
-const arrayLegnth = [1, 2, 3];
-console.log(arrayLength.length); // 3
-
-// shift: 배열 첫번째 요소를 제거
-const arrayTest = ['a', 'b', 'c'];
-arrayTest.shift(); // 'a'
-console.log(arrayTest); // ['b', 'c']
-
- concat : 두개의 배열을 합쳐서 새 배열로 반환
- const arrayConcat = [1, 2, 3];
- console.log(arrayConcat.concat(4)); // [1, 2, 3, 4] 4추가
- console.log(arrayConcat.contact(['a', 'b', 'c'])); [1, 2, 3, 'a', 'b', 'c']
-
- // join : 배열 요소 사이에 문자를 삽입하여 문자열 반환
- const arrayJoin = [1, 2, 3, 4, 5];
- console.log(arrayJoin.join('/')); // 1/2/3/4/5
-
- // reverse : 배열을 뒤집음
- const arrayReverse = [1, 2, 3]
- arrayReverse.reverse();
- console.log(arrayReverse); [3, 2, 1]
-
- // sort : 배열을 정렬
- const arraySort = [5, 3, 1];
- arraySort.sort();
- console.log(arraySort); // [1, 3, 5]
-
- // slice : 배열의 일부를 새 배열로 반환
-const arraySlice = [1, 2, 3, 4, 5];
-arraySlice.slice(1, 3); // [2, 3] slice(start[, end])
-
-// splice : 기존 배열의 요소를 제거하고, 제거한 요소를 새 배열로 반환
-const arraySplice = [1, 2, 3, 4];
-const test = arraySplice.splice(1, 2); // [2, 3]
-console.log(arraySplice); // [1, 4]
-```
-
-### 기존 배열을 변경하지 않는 메소드
-
-- concat()
-- join()
-- slice()
-
----
-
-### 배열 순회하기
-
-- forEach()
-- for in
-- for of
-- map
-
-#### forEach()
-
-- 배열 요소를 반복하며 특정 작업을 수행할 수 있으며, Array 타입에서만 사용가능한 메서드입니다.
-- forEach()의 안자로 callback 함수를 등록할 수 있습니다.
-- callback 함수 내에서는 index와 배열 요소값에 접근할 수 있습니다.
-
-```javascript
-const array = [1, 2, 3];
-array.forEach((item, index) => console.log(`${item}...${index}`)); // 1...0 , 2...1 , 3...2
-```
-
-#### for in
-
-- 객체에 사용할 수 있으며, 객체의 key와 value 값을 추출해내는데 사용합니다.
-- 객체의 key 갯수만큼 반복합니다.
-
-```javascript
-const array = [1, 2, 3];
-for (let key in array) {
-  console.log(`${array[key]}...${key}`); // 1...0 , 2...1 , 3... 2
-}
-```
-
-#### for of
-
-- ES6 에 추가된, 컬렉션 전용 반복구문 입니다.
-- for of 를 사용하려면 컬렉션 객체가 [Symbol.iterator] 속성을 가지고 있어야만 합니다.
-
-```javascript
-const array = [1, 2, 3];
-for (let item of array) {
-  console.log(`${item}`);
-} // 1, 2, 3
-```
-
-#### map
-
-- 리스트의 요소를 순회하며 현재 index의 요소의 데이터를 가공하여 새로운 리스트로 반환합니다.
-
-```javascript
-const array = [1, 2, 3];
-const newArray = array.map((item) => item + 1); // [2, 3, 4]
-```
-
 ### 백준
-- [배열문제](https://www.acmicpc.net/problem/tag/%EB%B0%B0%EC%97%B4)
+- [배열 문제](https://www.acmicpc.net/problem/tag/%EB%B0%B0%EC%97%B4)
 
 [Top](#자료구조)
 
 ---
 
-
 ## 큐
 
-- 출처 : [Zero Cho님 사이트](https://www.zerocho.com/category/Algorithm/post/580b9b94108f510015524097)
-- count, head, rear
-- data, next
-- enqueue, dequeue, front
+- 출처 : [Cookie님 Velog](https://velog.io/@ryu/JavaScript-%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0-Array%EB%B0%B0%EC%97%B4)
 
-```javascript
-var Queue = (function () {
-  function Queue() {
-    this.count = 0;
-    this.head = null;
-    this.rear = null;
-  }
-  function Node(data) {
-    this.data = data;
-    this.next = null;
-  }
-  Queue.prototype.enqueue = function (data) {
-    var node = new Node(data);
-    if (!this.head) {
-      this.head = node;
-    } else {
-      this.rear.next = node;
-    }
-    this.rear = node;
-    return ++this.count;
-  };
-  Queue.prototype.dequeue = function () {
-    if (!this.head) {
-      // stack underflow 방지
-      return false;
-    }
-    var data = this.head.data;
-    this.head = this.head.next;
-    // this.head 메모리 클린
-    --this.count;
-    return data;
-  };
-  Queue.prototype.front = function () {
-    return this.head && this.head.data;
-  };
-  return Queue;
-})();
-var queue = new Queue();
-queue.enqueue(1); // 1
-queue.enqueue(3); // 2
-queue.enqueue(5); // 3
-queue.dequeue(); // 1
-queue.front(); // 3
-```
+### 백준
+- [큐 문제](https://www.acmicpc.net/problem/tag/%ED%81%90)
+- [우선순위큐 문제](https://www.acmicpc.net/problem/tag/%EC%9A%B0%EC%84%A0%20%EC%88%9C%EC%9C%84%20%ED%81%90)
 
 [Top](#자료구조)
 
@@ -252,150 +69,36 @@ queue.front(); // 3
 
 ## 스택
 
-- 출처 : [Zero Cho님 사이트](https://www.zerocho.com/category/Algorithm/post/5800b79e1dfb250015c38db6)
-- top, count
-- data, next
-- push, pop, stackTop
+- 출처 : [Cookie님 Velog](https://velog.io/@ryu/JavaScript-%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0-Array%EB%B0%B0%EC%97%B4)
 
-```javascript
-var Stack = (function () {
-  function Stack() {
-    this.top = null;
-    this.count = 0;
-  }
-  function Node(data) {
-    this.data = data;
-    this.next = null;
-  }
-  Stack.prototype.push = function (data) {
-    var node = new Node(data);
-    node.next = this.top;
-    this.top = node;
-    return ++this.count;
-  };
-  Stack.prototype.pop = function () {
-    if (!this.top) {
-      // stack underflow 방지
-      return false;
-    }
-    var data = this.top.data;
-    this.top = this.top.next;
-    // 예전 this.top의 메모리 정리
-    this.count--;
-    return data;
-  };
-  Stack.prototype.stackTop = function () {
-    return this.top.data;
-  };
-  return Stack;
-})();
-var stack = new Stack();
-stack.push(1); // 1
-stack.push(3); // 2
-stack.push(5); // 3
-stack.pop(); // 5
-stack.stackTop(); // 3
-```
-
-[Top](#알고리즘)
-
----
-
-## 연결리스트
-
-- 출처 : [Zero Cho님 사이트](https://www.zerocho.com/category/Algorithm/post/58008a628475ed00152d6c4d)
-- length : 노드의 개수를 표현하는 부분, head : 첫 노드의 주소를 가리키는 부분
-- data, next
-- add, search, remove
-
-```javascript
-var LinkedList = (function () {
-  function LinkedList() {
-    this.length = 0;
-    this.head = null;
-  }
-  function Node(data) {
-    this.data = data;
-    this.next = null;
-  }
-  LinkedList.prototype.add = function (value) {
-    var node = new Node(value);
-    var current = this.head;
-    if (!current) {
-      // 현재 아무 노드도 없으면
-      this.head = node; // head에 새 노드를 추가합니다.
-      this.length++;
-      return node;
-    } else {
-      // 이미 노드가 있으면
-      while (current.next) {
-        // 마지막 노드를 찾고.
-        current = current.next;
-      }
-      current.next = node; // 마지막 위치에 노드를 추가합니다.
-      this.length++;
-      return node;
-    }
-  };
-  LinkedList.prototype.search = function (position) {
-    var current = this.head;
-    var count = 0;
-    while (count < position) {
-      // position 위치만큼 이동합니다.
-      current = current.next;
-      count++;
-    }
-    return current.data;
-  };
-  LinkedList.prototype.remove = function (position) {
-    var current = this.head;
-    var before;
-    var remove;
-    var count = 0;
-    if (position == 0) {
-      // 맨 처음 노드를 삭제하면
-      remove = this.head;
-      this.head = this.head.next; // head를 두 번째 노드로 교체
-      this.length--;
-      return remove;
-    } else {
-      // 그 외의 다른 노드를 삭제하면
-      while (count < position) {
-        before = current;
-        count++;
-        current = current.next;
-      }
-      remove = current;
-      before.next = remove.next;
-      // remove 메모리 정리
-      this.length--;
-      return remove;
-    }
-  };
-  return LinkedList;
-})();
-
-var list = new LinkedList();
-list.add(1);
-list.add(2);
-list.add(3);
-list.length; // 3
-list.search(0); // 1
-list.search(2); // 3
-list.remove(1);
-list.length; // 2
-```
+### 백준
+- [스택 문제](https://www.acmicpc.net/problem/tag/%EC%8A%A4%ED%83%9D)
 
 [Top](#자료구조)
 
 ---
 
-## 해쉬
+## 연결리스트
+
+### 연결리스트
+- 출처 : [소년코딩님 사이트](https://boycoding.tistory.com/33?category=916500)
+
+### 이중 연결리스트
+- 출처 : [소년코딩님 사이트](https://boycoding.tistory.com/34?category=916500)
+
+### 백준
+- [링크드리스트 문제](https://www.acmicpc.net/problem/tag/%EB%A7%81%ED%81%AC%EB%93%9C%20%EB%A6%AC%EC%8A%A4%ED%8A%B8)
+
+[Top](#자료구조)
+
+---
+
+## 해시
 
 - 출처 : [Evan Moon님 사이트](https://evan-moon.github.io/2019/06/25/hashtable-with-js/)
 
-```javascript
-```
+### 백준
+- [해싱 문제](https://www.acmicpc.net/problem/tag/%ED%95%B4%EC%8B%B1)
 
 [Top](#자료구조)
 
@@ -403,115 +106,10 @@ list.length; // 2
 
 ## 트리
 
-- 출처 : [Zero Cho님 사이트](https://www.zerocho.com/category/Algorithm/post/580ed6eb77023c0015ee9686)
-- Tree(count, root)
-- Node(data, left, right)
-- add, get, remove
+- 출처 : [760kry님 Velog](https://velog.io/@760kry/data-structure-Tree-BinarySearchTree-javascript-%EA%B5%AC%ED%98%84-9fk5jh3tgz)
 
-```javascript
-var Tree = (function () {
-  function Tree() {
-    this.count = 0;
-    this.root;
-  }
-  function Node(data) {
-    this.data = data;
-    this.left;
-    this.right;
-  }
-  function _insert(root, node) {
-    if (!root) return node;
-    if (node.data < root.data) {
-      root.left = _insert(root.left, node);
-      return root;
-    } else {
-      root.right = _insert(root.right, node);
-      return root;
-    }
-    return root;
-  }
-  Tree.prototype.add = function (data) {
-    var node = new Node(data);
-    if (this.count == 0) {
-      this.root = node;
-    } else {
-      _insert(this.root, node);
-    }
-    return ++this.count;
-  };
-  function _get(data, node) {
-    if (node) {
-      if (data < node.data) {
-        return _get(data, node.left);
-      } else if (data > node.data) {
-        return _get(data, node.right);
-      } else {
-        return node;
-      }
-    } else {
-      return null;
-    }
-  }
-  Tree.prototype.get = function (data) {
-    if (this.root) {
-      return _get(data, this.root);
-    } else {
-      return null;
-    }
-  };
-  function _remove(root, data) {
-    var newRoot, exchange, temp;
-    if (!root) return false;
-    if (data < root.data) {
-      root.left = _remove(root.left, data);
-    } else if (data > root.data) {
-      root.right = _remove(root.right, data);
-    } else {
-      if (!root.left) {
-        newRoot = root.right;
-        // root 메모리 정리
-        return newRoot;
-      } else if (!root.right) {
-        newRoot = root.left;
-        // root 메모리 정리
-        return newRoot;
-      } else {
-        exchange = root.left;
-        while (exchange.right) exchange = exchange.right;
-        temp = root.data;
-        root.data = exchange.data;
-        exchange.data = temp;
-        root.left = _remove(root.left, exchange.data);
-      }
-    }
-    return root;
-  }
-  Tree.prototype.remove = function (key) {
-    var node = _remove(this.root, key);
-    if (node) {
-      this.root = node;
-      this.count--;
-      if (this.count == 0) this.root = null;
-    }
-    return true;
-  };
-  return Tree;
-})();
-
-var tree = new Tree();
-tree.add(5); // 1
-tree.add(3); // 2
-tree.add(4); // 3
-tree.add(2); // 4
-tree.add(7); // 5
-tree.add(6); // 6
-tree.root.left.data; // 3
-tree.root.left.left.data; // 2;
-tree.root.left.right.data; // 4
-tree;
-tree.remove(3);
-tree.root.left.data;
-```
+### 백준
+- [트리 문제](https://www.acmicpc.net/problem/tag/%ED%8A%B8%EB%A6%AC)
 
 [Top](#자료구조)
 
@@ -519,84 +117,10 @@ tree.root.left.data;
 
 ## 힙
 
-- O(NlgN)
+- 출처 : [1ilsang님 사이트](https://1ilsang.dev/2020-04-02/js/heap)
 
-- 출처 : [Zero Cho님 사이트](hhttps://www.zerocho.com/category/Algorithm/post/582de223d4416a001860e763)
-
-```javascript
-var Heap = (function () {
-  function Heap() {
-    this.arr = [];
-  }
-  function reheapUp(self, idx) {
-    if (idx) {
-      var parent = parseInt((idx - 1) / 2);
-      if (self.arr[idx] > self.arr[parent]) {
-        var temp = self.arr[idx];
-        self.arr[idx] = self.arr[parent];
-        self.arr[parent] = temp;
-        reheapUp(self, parent);
-      }
-    }
-  }
-  function reheapDown(self, idx) {
-    var left = 0;
-    var right = 0;
-    var large;
-    if (idx * 2 + 1 < self.arr.length) {
-      left = self.arr[idx * 2 + 1];
-      if (idx * 2 + 2 < self.arr.length - 1) {
-        right = self.arr[idx * 2 + 2];
-      }
-      if (left > right) {
-        large = idx * 2 + 1;
-      } else {
-        large = idx * 2 + 2;
-      }
-      if (self.arr[idx] < self.arr[large]) {
-        var temp = self.arr[idx];
-        self.arr[idx] = self.arr[large];
-        self.arr[large] = temp;
-        reheapDown(self, large);
-      }
-    }
-  }
-  Heap.prototype.insert = function (number) {
-    var last = this.arr.length;
-    this.arr[last] = number;
-    reheapUp(this, last);
-    return true;
-  };
-  Heap.prototype.delete = function () {
-    if (this.arr.length === 0) {
-      return false;
-    }
-    var del = this.arr[0];
-    this.arr[0] = this.arr.pop();
-    reheapDown(this, 0);
-    return del;
-  };
-  Heap.prototype.sort = function () {
-    var sort = [];
-    var count = this.arr.length;
-    for (var i = 0; i < count; i++) {
-      sort.push(this.delete());
-    }
-    return sort;
-  };
-  return Heap;
-})();
-
-var heap = new Heap();
-heap.insert(5);
-heap.insert(3);
-heap.insert(7);
-heap.insert(4);
-heap.insert(2);
-heap.insert(6);
-heap.insert(1);
-heap.sort(); // [7,6,5,4,3,2,1]
-```
+### 백준
+- [힙 문제](https://www.acmicpc.net/problem/tag/%ED%9E%99)
 
 [Top](#자료구조)
 
