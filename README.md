@@ -1,3 +1,5 @@
+# 상세내용은 [Velog](https://velog.io/@blackb0x)에 정리하고 있습니다.
+
 # 📝 Table of Contents
 
 # 자료구조
